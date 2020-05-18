@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'One-gallery'|trans }}
+{% endblock %}
+{% block header %}
+    {% block stylesheets %}
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/galleries.css') }}">
+        <h1>{{ 'One-gallery'|trans }}</h1>
+        <h2>{{ 'This-gallery-is-called'|trans}} {{  gallery.nameGallery }}</h2>
+        <a href="{{ url('galleries_index') }}">Back to galleries </a>
+    {% endblock  %}
+
+{% endblock %}
+
+
+{% block body %}
+
+    {% block main %}
+        <div id="photo_gallery">
+            <div class="card" style="width: 18rem;">
+                <img src="public/photos/damon.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Photo title</h5>
+                    <p class="card-text">Photo description</p>
+                    <a href="/comments" class="btn btn-primary">Go to comments</a>
+                </div>
+            </div>
+
+        </div>
+
+    {% endblock %}
+
+    {#    <p><a href="/galleries">Back</a></p>#}
+{% endblock %}
