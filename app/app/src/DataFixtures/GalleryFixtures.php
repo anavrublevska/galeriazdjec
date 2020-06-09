@@ -1,6 +1,6 @@
 <?php
 /**
- * fixture for Gallery
+ * fixture for Gallery.
  */
 namespace App\DataFixtures;
 
@@ -20,11 +20,13 @@ class GalleryFixtures extends AbstractBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 20; ++$i) {
+        $this->createMany(20, 'galleries', function ($i) {
             $gallery = new Gallery();
             $gallery->setNameGallery($this->faker->colorName);
             $this->manager->persist($gallery);
-        }
+
+            return $gallery;
+        });
 
         $manager->flush();
     }

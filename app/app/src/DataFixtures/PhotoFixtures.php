@@ -21,12 +21,23 @@ class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInte
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(20, 'photos', function ($i) {
+        $this->createMany(30, 'photos', function ($i) {
             $photo = new Photo();
             $photo->setTitle($this->faker->word);
             $photo->setDescription($this->faker->sentence);
-            $photo->setLink('a.jpeg');
+            $input = array("a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg", "f.jpeg");
+            $numb=rand(0,5);
+            $randy=$input[$numb];
+            $photo->setLink($randy);
             $photo->setGallery($this->getRandomReference('galleries'));
+            $photo->setAuthor($this->getRandomReference('users'));
+            $tags = $this->getRandomReferences(
+                'tags',
+                $this->faker->numberBetween(0,4)
+            );
+            foreach ($tags as $tag) {
+                $photo->addTag($tag);
+            }
 
             return $photo;
         });
@@ -43,7 +54,7 @@ class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInte
      */
     public function getDependencies(): array
     {
-        return [GalleryFixtures::class];
+        return [GalleryFixtures::class, TagFixtures::class, UserFixtures::class];
     }
 
 }

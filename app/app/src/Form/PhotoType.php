@@ -6,7 +6,8 @@ namespace App\Form;
 
 use App\Entity\Gallery;
 use App\Entity\Photo;
-
+use App\Form\DataTransformer\TagsDataTransformer;
+use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,6 +22,21 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
  */
 class PhotoType extends AbstractType
 {
+    /**
+     * Tags data transformer.
+     *
+     * @var \App\Form\DataTransformer\TagsDataTransformer
+     */
+    private $tagsDataTransformer;
+
+    /**
+     * PhotoType constructor.
+     * @param TagsDataTransformer $tagsDataTransformer
+     */
+    public function __construct(TagsDataTransformer $tagsDataTransformer)
+    {
+        $this->tagsDataTransformer = $tagsDataTransformer;
+    }
     /**
      * Builds the form.
      *
@@ -70,6 +86,20 @@ class PhotoType extends AbstractType
                 'required' => true,
             ]
         );
+        $builder->add(
+            'tags',
+            TextType::class,
+            [
+                'label' => 'label_tags',
+                'required' => false,
+                'attr' => ['max_length' => 128],
+            ]
+        );
+
+        $builder->get('tags')->addModelTransformer(
+            $this->tagsDataTransformer
+        );
+
 
     }
 

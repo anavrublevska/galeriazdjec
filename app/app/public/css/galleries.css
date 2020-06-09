@@ -6,21 +6,27 @@ h1{
     text-align: center;
     font-size: 4rem;
     font-family: 'Annie Use Your Telescope', cursive;
-    margin-top:50px;
+    margin-top:25px;
 
 }
 h2 {
     text-align: center;
     font-size: 2rem;
     font-family: 'Titillium Web', sans-serif;
-    margin:5%;
+    margin:2%;
 
 }
 .list-group-item:last-child {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+#createbutton {
+    margin-left:46%;
+    margin-top:20px;
+    margin-bottom: 20px;
 }
 body {
-    background-color: #f6e6e6;
+    background-color: #dfaeb4;
 }
 
 #tabelka {
@@ -31,4 +37,7 @@ body {
 .gallerylist {
     font-family: 'Titillium Web', sans-serif;
     text-align: center;
+}
+#nav {
+    background-color: #dfaeb4;
 }

@@ -62,6 +62,51 @@
                      <source>Here you can see the list of all galleries:</source>
                      <target>Here you can see the list of all galleries:</target>
             </trans-unit>
+             <trans-unit id="action_edit">
+                      <source>action_edit</source>
+                      <target>Edit</target>
+             </trans-unit>
+             <trans-unit id="action_delete">
+                       <source>action_delete</source>
+                        <target>Delete</target>
+             </trans-unit>
+              <trans-unit id="action_login">
+                        <source>action_login</source>
+                        <target>Log in</target>
+              </trans-unit>
+               <trans-unit id="action_logout">
+                        <source>action_logout</source>
+                        <target>Log out</target>
+               </trans-unit>
+               <trans-unit id="see_this_photo">
+                                       <source>see_this_photo</source>
+                                       <target>Watch me!</target>
+                             </trans-unit>
+                             <trans-unit id="photos">
+                                                                    <source>photos</source>
+                                                                    <target>Photooos</target>
+                                                           </trans-unit>
+                              <trans-unit id="photo_create">
+                                       <source>photo_create</source>
+                                       <target>Add a photo</target>
+                              </trans-unit>
+                              <trans-unit id="adding_new_photo">
+                                                                     <source>adding_new_photo</source>
+                                                                     <target>Adding new photo</target>
+                                                            </trans-unit>
+                                                            <trans-unit id="label_photo">
+                                                                                   <source>label_photo</source>
+                                                                                    <target>Choose photo</target>
+                                                                         </trans-unit>
+                                                                          <trans-unit id="label_gallery">
+                                                                                    <source>label_gallery</source>
+                                                                                    <target>Pick gallery</target>
+                                                                          </trans-unit>
+                                                                           <trans-unit id="save">
+                                                                                    <source>save</source>
+                                                                                    <target>Save me</target>
+                                                                           </trans-unit>
+
 
         </body>
     </file>

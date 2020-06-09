@@ -71,7 +71,9 @@ class PhotoController extends AbstractController
 
         $form = $this->createForm(PhotoType::class, $photo);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $photo->setAuthor($this->getUser());
 
             $photoFilename = $form->get('file')->getData();
             $response = new Response();

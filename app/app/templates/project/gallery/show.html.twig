@@ -1,37 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'One-gallery'|trans }}
+    {{ 'One-gallery'|trans({'%id%': gallery.id|default('')}) }}
 {% endblock %}
 {% block header %}
     {% block stylesheets %}
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/galleries.css') }}">
-        <h1>{{ 'One-gallery'|trans }}</h1>
-        <h2>{{ 'This-gallery-is-called'|trans}} {{  gallery.nameGallery }}</h2>
-        <a href="{{ url('galleries_index') }}">Back to galleries </a>
+        <link rel="stylesheet" href="{{ asset('css/photosList.css') }}">
+
     {% endblock  %}
 
 {% endblock %}
 
 
 {% block body %}
+    <h1>{{ 'One-gallery'|trans }}</h1>
+    <h2>{{ 'This-gallery-is-called'|trans}} {{  gallery.nameGallery }}</h2>
+    <a href="{{ url('galleries_index') }}">Back to galleries </a>
 
-    {% block main %}
-        <div id="photo_gallery">
-            <div class="card" style="width: 18rem;">
-                <img src="public/photos/damon.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Photo title</h5>
-                    <p class="card-text">Photo description</p>
-                    <a href="/comments" class="btn btn-primary">Go to comments</a>
-                </div>
+     {% if gallery is defined and gallery|length %}
+            <div id="photo_gallery">
+                {% for photos in gallery.photos %}
+                    <div class="card">
+                        <img src="/uploads/photos/{{ photos.link }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ photos.title }}</h5>
+                            <h6>{{ photos.gallery.nameGallery }}</h6>
+                            <p class="card-text">{{ photos.description }}</p>
+
+
+                            <a href="{{  url('photo_show', {id: photos.id})  }}" title="{{ 'see_this_photo'|trans }}" class="btn btn-primary">{{ 'see_this_photo'|trans }}</a>
+                        </div>
+                    </div>
+
+                {% endfor %}
             </div>
 
-        </div>
+        {% else %}
+            <p>
+                {{ 'message_empty_list'|trans }}
+            </p>
+
+        {% endif %}
+
+
 
     {% endblock %}
-
-    {#    <p><a href="/galleries">Back</a></p>#}
-{% endblock %}

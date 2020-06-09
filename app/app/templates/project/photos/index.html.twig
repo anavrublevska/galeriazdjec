@@ -10,7 +10,7 @@
 {% endblock  %}
 {% block body %}
     <h1>{{ 'photos_list'|trans }}</h1>
-    <a href="{{ url('photo_create') }}">{{ 'photo_create'|trans }}</a>
+    <a href="{{ url('photo_create') }}" class="btn btn-outline-light">{{ 'photo_create'|trans }}</a>
     {% if pagination is defined and pagination.items|length %}
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center text-dark">
@@ -22,14 +22,14 @@
 
           <div id="photo_gallery">
             {% for photo in pagination %}
-                <div class="card">
+                <div id="photo" class="card">
                     <img src="/uploads/photos/{{ photo.link }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ photo.title }}</h5>
                         <h6>{{ photo.gallery.nameGallery }}</h6>
                         <p class="card-text">{{ photo.description }}</p>
 
-                        <a href="{{  url('photo_show', {id: photo.id})  }}" title="{{ 'see_this_photo'|trans }}" class="btn btn-primary">{{ 'see_this_photo'|trans }}</a>
+                        <a href="{{  url('photo_show', {id: photo.id})  }}" title="{{ 'see_this_photo'|trans }}" class="btn btn-outline-dark">{{ 'see_this_photo'|trans }}</a>
                     </div>
                 </div>
             {% endfor %}

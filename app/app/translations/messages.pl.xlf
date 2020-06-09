@@ -52,7 +52,7 @@
                          </trans-unit>
                          <trans-unit id="Welcome to the Photo gallery!">
                                   <source>Welcome to the Photo gallery!</source>
-                                  <target>Witamy w Galerii Any</target>
+                                  <target>Witamy w Galerii</target>
                          </trans-unit>
                          <trans-unit id="This-gallery-is-called">
                                   <source>This-gallery-is-called</source>
@@ -62,6 +62,55 @@
                                   <source>Here you can see the list of all galleries:</source>
                                   <target>Tutaj lista wszytskich galerii:</target>
                          </trans-unit>
+                          <trans-unit id="action_edit">
+                                   <source>action_edit</source>
+                                   <target>Edytuj</target>
+                          </trans-unit>
+                          <trans-unit id="action_delete">
+                                    <source>action_delete</source>
+                                    <target>Usuń</target>
+                          </trans-unit>
+                            <trans-unit id="action_login">
+                                    <source>action_login</source>
+                                    <target>Zaloguj</target>
+                            </trans-unit>
+                            <trans-unit id="action_logout">
+                                     <source>action_logout</source>
+                                     <target>Wyloguj</target>
+                            </trans-unit>
+                            <trans-unit id="see_this_photo">
+                                      <source>see_this_photo</source>
+                                      <target>Zobacz mnie!</target>
+                            </trans-unit>
+                             <trans-unit id="photo_create">
+                                       <source>photo_create</source>
+                                       <target>Dodaj fancy zdjęcie</target>
+                              </trans-unit>
+                               <trans-unit id="photos_list">
+                                        <source>photos_list</source>
+                                        <target>Tutaj wszystkie fancy</target>
+                               </trans-unit>
+                               <trans-unit id="photos">
+                                            <source>photos</source>
+                                            <target>Zdjęcia</target>
+                               </trans-unit>
+                                <trans-unit id="adding_new_photo">
+                                                                                                    <source>adding_new_photo</source>
+                                                                                                    <target>Dodaj nowe fancyphoto</target>
+                                                                                           </trans-unit>
+                                                                                           <trans-unit id="label_photo">
+                                                                                                                  <source>label_photo</source>
+                                                                                                                   <target>Zdjęcie</target>
+                                                                                                        </trans-unit>
+                                                                                                         <trans-unit id="label_gallery">
+                                                                                                                   <source>label_gallery</source>
+                                                                                                                   <target>Galeria</target>
+                                                                                                         </trans-unit>
+                                                                                                          <trans-unit id="save">
+                                                                                                                   <source>save</source>
+                                                                                                                   <target>Dodaj mnie!</target>
+                                                                                                          </trans-unit>
+
         </body>
     </file>
 </xliff>

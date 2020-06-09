@@ -18,20 +18,18 @@ class HelloWorldController
     /**
      * Index action.
      *
-     * @param string $name User input
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route(
-     *     "/{name}",
-     *     methods={"GET"},
-     *     name="hello-world_index",
-     *     defaults={"name":"World"},
-     *     requirements={"name": "[a-zA-Z]+"},
+     *     "/"
      * )
      */
-    public function index(string $name): Response
+    public function index(): Response
     {
-        return new Response('Hello '.$name.'!');
+        $input = array("Neo", "Morpheus", "Trinity", "Cypher", "Tank");
+        $numb=rand(0,4);
+        $random=$input[$numb];
+        return new Response('Hello '.$random.'!');
     }
 }

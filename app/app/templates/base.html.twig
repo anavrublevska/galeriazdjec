@@ -9,14 +9,8 @@
 </head>
 
 <body>
-<div class="container-fluid">
-    {% for type, messages in app.session.flashBag.all %}
-        {% for message in messages %}
-            <div class="alert alert-{{ type }}" role="alert">
-                {{ message|trans }}
-            </div>
-        {% endfor %}
-    {% endfor %}
+
+
     {% block nav %}
         <nav  class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Fancy&Photos</a>
@@ -24,23 +18,45 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ url('galleries_index') }}">Galleries <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('photos_index') }}">See photos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('photo_create') }}">Add one!</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
+                {% if is_granted("ROLE_USER") %}
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('galleries_index') }}">{{'Galleries'|trans}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('photos_index') }}">{{'photos'|trans}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('photo_create') }}">{{'photo_create'|trans}}</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text">
 
-    </span>
+            </span>
+                {% endif %}
+
             </div>
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                <div>{{ app.user.email }}</div>
+                <div>
+                    <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+                </div>
+            {% else %}
+                <div>
+                    <a href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
+                </div>
+            {% endif %}
         </nav>
     {% endblock %}
+    <div class="container-fluid">
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}" role="alert">
+                    {{ message|trans }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
     {% block body %}
 
     {% endblock %}

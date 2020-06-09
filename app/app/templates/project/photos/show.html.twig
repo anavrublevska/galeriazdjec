@@ -17,6 +17,13 @@
                 <dd>{{ photo.title }}</dd>
                 <dt>{{ 'photo_description'|trans }}</dt>
                 <dd>{{ photo.description }}</dd>
+
+                    <dt>{{ 'photo_tags'|trans }}</dt>
+                    {% for tags in photo.tags %}
+                    <dd>{{ tags.title }}</dd>
+                    {% endfor %}
+
+
                 <a href="{{ url('photo_edit', {'id': photo.id}) }}">edit</a>
                 <a href="{{ url('photo_delete', {'id': photo.id}) }}">Delete</a>
 
