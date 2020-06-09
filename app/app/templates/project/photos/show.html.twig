@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'see_this_photo'|trans({'%id%': photo.id|default('')}) }}
+{% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/photoOne.css') }}">
+{% endblock  %}
+{% block body %}
+    <h1>{{ 'see_this_photo'|trans({'%id%': photo.id|default('')}) }}</h1>
+    {% if photo is defined and photo|length %}
+        <div>
+            <dl>
+                <dt>{{ 'photo_title'|trans }}</dt>
+                <dd>{{ photo.title }}</dd>
+                <dt>{{ 'photo_description'|trans }}</dt>
+                <dd>{{ photo.description }}</dd>
+                <a href="{{ url('photo_edit', {'id': photo.id}) }}">edit</a>
+                <a href="{{ url('photo_delete', {'id': photo.id}) }}">Delete</a>
+
+            </dl>
+            <img id="photo" src="/uploads/photos/{{ photo.link }}" >
+            <p>
+                <a href="{{ url('photos_index') }}" title="{{ 'action_back_to_list'|trans }}">
+                    {{ 'action_back_to_list'|trans }}
+                </a>
+            </p>
+
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'message_item_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

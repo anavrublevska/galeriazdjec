@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope');
+
+h1{
+
+    text-align: center;
+    font-size: 4rem;
+    font-family: 'Annie Use Your Telescope', cursive;
+    margin-top:25px;
+
+}
+
+
+body {
+    background-color: #adbabd;
+}
+
+form {
+    text-align: center;
+    background-color: #4f5d75;
+    margin-top:30px;
+    margin-left: 20%;
+    margin-right: 20%;
+    width:60%;
+    padding:30px;
+}
+

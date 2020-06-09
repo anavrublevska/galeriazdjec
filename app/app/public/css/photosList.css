@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope');
+
+h1{
+
+    text-align: center;
+    font-size: 4rem;
+    font-family: 'Annie Use Your Telescope', cursive;
+    margin-top:25px;
+
+}
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Titillium Web', sans-serif;
+    margin:2%;
+
+}
+
+body {
+    background-color: #babbce;
+
+}
+
+#photo_gallery {
+   display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
+#photo_gallery .card {
+    width: 26%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#photo img {
+    width:100%;
+    height:50%;
+}
+
