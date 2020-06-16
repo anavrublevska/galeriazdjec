@@ -73,9 +73,18 @@ class Photo
      */
     private $author;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="photo", orphanRemoval=true)
+     */
+    private $comments;
+
+
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+
     }
 
     /**
@@ -205,16 +214,66 @@ class Photo
 
     }
 
+    /**
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * @param User|null $author
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
 
+
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPhoto($this);
+
+        }
+
         return $this;
     }
+
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getPhoto() === $this) {
+                $comment->setPhoto(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 
 }

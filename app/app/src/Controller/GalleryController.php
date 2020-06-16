@@ -108,8 +108,8 @@ class GalleryController extends AbstractController{
     }
 
     /**
-     * @param Request $request
-     * @param Gallery $gallery
+     * @param Request           $request
+     * @param Gallery           $gallery
      * @param GalleryRepository $galleryRepository
      * @return Response
      * @throws \Doctrine\ORM\ORMException
@@ -145,8 +145,8 @@ class GalleryController extends AbstractController{
     }
 
     /**
-     * @param Request $request
-     * @param Gallery $gallery
+     * @param Request           $request
+     * @param Gallery           $gallery
      * @param GalleryRepository $galleryRepository
      * @return Response
      * @throws \Doctrine\ORM\ORMException

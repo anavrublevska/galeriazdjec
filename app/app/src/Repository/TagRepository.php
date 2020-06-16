@@ -36,6 +36,16 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->flush($tag);
     }
 
+    /**
+     * @param Tag $tag
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Tag $tag): void{
+        $this->_em->remove($tag);
+        $this->_em->flush($tag);
+    }
+
     // /**
     //  * @return Tag[] Returns an array of Tag objects
     //  */

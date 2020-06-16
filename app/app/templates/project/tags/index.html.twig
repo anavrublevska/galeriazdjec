@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'tags_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'tags_list'|trans }}</h1>
+    {% if data is defined and data|length %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'Title'|trans }}</th>
+                <th>{{ 'delete'|trans }}</th>
+                <th>{{ 'edit'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td><a href="{{ url('tag_delete', {'id': item.id}) }}">{{'delete'|trans}}</a></td>
+                    <td><a href="{{ url('tag_edit', {'id': item.id}) }}">{{'edit'|trans}}</a></td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            {{ 'message_empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock  %}

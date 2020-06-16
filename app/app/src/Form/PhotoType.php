@@ -58,6 +58,7 @@ class PhotoType extends AbstractType
                 'mapped' => false,
                 'label' => 'label_photo',
                 'required' => true,
+
                 'constraints' => new Image(
                     [
                         'maxSize' => '4000k',

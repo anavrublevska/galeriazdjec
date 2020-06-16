@@ -30,31 +30,6 @@ class Tag
      */
     private $id;
 
-    /**
-     * Created at.
-     *
-     * @var DateTimeInterface
-     *
-     * @ORM\Column(type="datetime")
-     *
-     * @Assert\DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $createdAt;
-
-    /**
-     * Updated at.
-     *
-     * @var DateTimeInterface
-     *
-     * @ORM\Column(type="datetime")
-     *
-     * @Assert\DateTime
-     *
-     * @Gedmo\Timestampable(on="update")
-     */
-    private $updatedAt;
 
     /**
      * Title.
@@ -100,40 +75,6 @@ class Tag
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTimeInterface $createdAt
-     */
-    public function setCreatedAt(\DateTimeInterface $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-
-    }
-
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTimeInterface $updatedAt
-     */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
-
     }
 
     /**

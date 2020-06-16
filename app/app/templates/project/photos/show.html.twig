@@ -10,6 +10,11 @@
 {% endblock  %}
 {% block body %}
     <h1>{{ 'see_this_photo'|trans({'%id%': photo.id|default('')}) }}</h1>
+    <p>
+        <a href="{{ url('photos_index') }}" title="{{ 'action_back_to_list'|trans }}">
+            {{ 'action_back_to_list'|trans }}
+        </a>
+    </p>
     {% if photo is defined and photo|length %}
         <div>
             <dl>
@@ -24,18 +29,38 @@
                     {% endfor %}
 
 
-                <a href="{{ url('photo_edit', {'id': photo.id}) }}">edit</a>
-                <a href="{{ url('photo_delete', {'id': photo.id}) }}">Delete</a>
+                <a href="{{ url('photo_edit', {'id': photo.id}) }}">{{'edit'|trans}}</a>
+                <a href="{{ url('photo_delete', {'id': photo.id}) }}">{{'delete'|trans}}</a>
 
             </dl>
             <img id="photo" src="/uploads/photos/{{ photo.link }}" >
-            <p>
-                <a href="{{ url('photos_index') }}" title="{{ 'action_back_to_list'|trans }}">
-                    {{ 'action_back_to_list'|trans }}
-                </a>
-            </p>
+
 
         </div>
+
+            {% for comments in photo.comments %}
+                    <div>
+                        <h6>{{ comments.user.email }}</h6>
+                        <p>{{ comments.content }}</p>
+                        <a href="{{ url('comment_edit', {id: comments.id, photo_id: photo.id}) }}">{{'edit'|trans}}</a>
+                        <a href="{{ url('comment_delete', {id: comments.id, photo_id: photo.id}) }}">{{'delete'|trans}}</a>
+                    </div>
+
+            {% endfor %}
+
+        <h1> {{ 'adding_new_comment'|trans }}</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <div  class="form-group row float-sm-right">
+            <input type="submit" value="{{ 'save'|trans }}" class="btn btn-light">
+        </div>
+
+        {{ form_end(form) }}
+
+
+
 
     {% else %}
         <p>
