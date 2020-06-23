@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'users_list'|trans }}
+{% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/lists.css') }}">
+{% endblock  %}
+{% block body %}
+    <h1>{{ 'users_index'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <table id="table" class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'email'|trans }}</th>
+                <th>{{ 'edit'|trans }}</th>
+                <th>{{ 'edit'|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in pagination.items %}
+                <tr class="table-light">
+                    <td >{{ user.email }}</td>
+                    <td><a class="btn btn-outline-secondary" href="{{ url('edit_email', {'id': user.id}) }}">{{'edit_email'|trans}}</a></td>
+                    <td><a class="btn btn-outline-secondary" href="{{ url('edit_password', {'id': user.id}) }}">{{'edit_password'|trans}}</a></td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center text-dark">
+
+                {{ knp_pagination_render(pagination) }}
+
+            </ul>
+        </nav>
+
+    {% else %}
+        <p>
+            {{ 'message_empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock  %}

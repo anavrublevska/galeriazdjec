@@ -1,17 +1,14 @@
 <?php
-
+/**
+ * Entity Tag.
+ */
 namespace App\Entity;
 
 use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
-
-
 
 /**
  * Class Tag.
@@ -41,23 +38,17 @@ class Tag
      *     length=64,
      * )
      *
-     * @Assert\Type(type="string")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *     min="3",
-     *     max="64",
-     * )
+     *
      */
     private $title;
 
     /**
      * Tasks.
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Photo[] Photos
+     * @var ArrayCollection|Photo[] Photos
      *
      * @ORM\ManyToMany(targetEntity=Photo::class, mappedBy="tags")
      *
-     * @Assert\Type(type="Doctrine\Common\Collections\ArrayCollection")
      */
     private $photos;
 
@@ -91,7 +82,6 @@ class Tag
     public function setTitle(string $title): void
     {
         $this->title = $title;
-
     }
 
 
@@ -114,10 +104,11 @@ class Tag
             $this->photos[] = $photo;
             $photo->addTag($this);
         }
-
     }
 
     /**
+     * Remove photo.
+     *
      * @param Photo $photo
      */
     public function removePhoto(Photo $photo): void
@@ -126,6 +117,5 @@ class Tag
             $this->photos->removeElement($photo);
             $photo->removeTag($this);
         }
-
     }
 }

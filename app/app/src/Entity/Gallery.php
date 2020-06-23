@@ -53,6 +53,9 @@ class Gallery
      */
     private $photos;
 
+    /**
+     * Gallery constructor.
+     */
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -63,7 +66,6 @@ class Gallery
      *
      * @return int|null
      */
-
     public function getId(): ?int
     {
         return $this->id;
@@ -74,19 +76,16 @@ class Gallery
      *
      * @return string|null
      */
-
     public function getNameGallery(): ?string
     {
         return $this->name_gallery;
     }
 
     /**
-     *
      *  Setter for name_gallery.
      *
      *  @param string $name_gallery
      */
-
     public function setNameGallery(string $name_gallery): void
     {
         $this->name_gallery = $name_gallery;
@@ -109,7 +108,6 @@ class Gallery
             $this->photos[] = $photo;
             $photo->setGallery($this);
         }
-
     }
 
     /**

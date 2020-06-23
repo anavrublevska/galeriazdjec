@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'One-gallery'|trans({'%id%': gallery.id|default('')}) }}
+    {{ 'tag_filtration'|trans({'%id%': tag.id|default('')}) }}
 {% endblock %}
 {% block header %}
     {% block stylesheets %}
@@ -15,13 +15,13 @@
 
 
 {% block body %}
-    <h1>{{ 'One-gallery'|trans }}</h1>
-    <h2>{{ 'This-gallery-is-called'|trans}} {{  gallery.nameGallery }}</h2>
-    <a class="btn btn-outline-dark" href="{{ url('galleries_index') }}">{{ 'go_back'|trans }}</a>
+    <h1>{{ 'tag_filtration'|trans }}</h1>
+    <h2>{{ 'photos_for_tag:'|trans}} {{  tag.title }}</h2>
+    <a class="btn btn-outline-dark" href="{{ url('tags_index') }}">{{ 'go_back'|trans }}</a>
 
-    {% if gallery is defined and gallery|length %}
+    {% if tag is defined and tag|length %}
         <div id="photo_gallery">
-            {% for photos in gallery.photos %}
+            {% for photos in tag.photos %}
                 <div id="photo"  class="card">
                     <img src="/uploads/photos/{{ photos.link }}" class="card-img-top" alt="...">
                     <div class="card-body">

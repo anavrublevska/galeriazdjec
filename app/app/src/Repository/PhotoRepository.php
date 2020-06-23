@@ -6,6 +6,8 @@ namespace App\Repository;
 
 use App\Entity\Photo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -61,8 +63,8 @@ class PhotoRepository extends ServiceEntityRepository
 
     /**
      * @param Photo $photo
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Photo $photo): void
     {
@@ -72,15 +74,13 @@ class PhotoRepository extends ServiceEntityRepository
 
     /**
      * @param Photo $photo
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Photo $photo): void {
         $this->_em->remove($photo);
         $this->_em->flush($photo);
     }
-
-
 
 
 }

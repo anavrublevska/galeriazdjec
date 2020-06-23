@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title_photo_delete'|trans({'%id%': photo.id|default('')}) }}
+    {{ 'photo_delete'|trans({'%id%': photo.id|default('')}) }}
 {% endblock %}
 {% block stylesheets %}
     {#        <link rel="stylesheet" href="{{ asset('css/photosForm.css') }}">#}
@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title_photo_delete'|trans({'%id%': photo.id|default('')}) }}</h1>
+    <h1>{{ 'photo_delete'|trans({'%id%': photo.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('photo_delete', {id: photo.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">

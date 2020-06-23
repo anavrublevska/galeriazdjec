@@ -8,7 +8,9 @@ namespace App\Controller;
 use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\TagRepository;
-use Doctrine\DBAL\Types\TextType;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +25,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class TagController extends AbstractController
 {
     /**
-     * @param TagRepository $tagRepository
+     * Index tags.
+     *
+     * @param Request            $request
+     * @param TagRepository      $tagRepository
+     * @param PaginatorInterface $paginator
+     *
      * @return Response
      *
      * @Route(
@@ -32,11 +39,53 @@ class TagController extends AbstractController
      *     name="tags_index",
      * )
      */
-    public function index(TagRepository $tagRepository): Response
+    public function index(Request $request, TagRepository $tagRepository, PaginatorInterface $paginator): Response
     {
+        $pagination = $paginator->paginate(
+            $tagRepository->queryAll(),
+            $request->query->getInt('page', 1),
+            TagRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
+
         return $this->render(
             'project/tags/index.html.twig',
-            ['data' => $tagRepository->findAll()]
+            ['pagination' => $pagination]
+        );
+    }
+
+
+    /**
+     * Create tag.
+     *
+     * @param Request       $request
+     * @param TagRepository $tagRepository
+     *
+     * @return Response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
+     * @Route(
+     *     "/create",
+     *     methods={"GET", "POST"},
+     *     name="tag_create",
+     * )
+     */
+    public function create(Request $request, TagRepository $tagRepository): Response
+    {
+        $tag = new Tag();
+        $form = $this->createForm(TagType::class, $tag);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $tagRepository->save($tag);
+            $this->addFlash('success', 'Yeeeep! You have added a new tag!');
+
+            return $this->redirectToRoute('tags_index');
+        }
+
+        return $this->render(
+            'project/tags/create.html.twig',
+            ['form' => $form->createView()]
         );
     }
 
@@ -46,8 +95,9 @@ class TagController extends AbstractController
      * @param TagRepository $tagRepository
      *
      * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/edit",
@@ -56,19 +106,19 @@ class TagController extends AbstractController
      *     name="tag_edit",
      * )
      */
-
     public function edit(Request $request, Tag $tag, TagRepository $tagRepository): Response
     {
         $form = $this->createForm(TagType::class, $tag, ['method' => 'PUT']);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $tagRepository->save($tag);
 
             $this->addFlash('info', 'Wow you did a great edit!');
 
             return $this->redirectToRoute('tags_index');
         }
+
         return $this->render(
             'project/tags/edit.html.twig',
             [
@@ -76,7 +126,6 @@ class TagController extends AbstractController
                 'tag' => $tag,
             ]
         );
-
     }
 
     /**
@@ -85,9 +134,11 @@ class TagController extends AbstractController
      * @param Request       $request
      * @param Tag           $tag
      * @param TagRepository $tagRepository
+     *
      * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/delete",
@@ -101,16 +152,17 @@ class TagController extends AbstractController
         $form = $this->createForm(FormType::class, $tag, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
-        if ($request->isMethod('DELETE') && !$form->isSubmitted()){
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
         }
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $tagRepository->delete($tag);
             $this->addFlash('warning', 'Oh no you deleted a tag');
 
             return $this->redirectToRoute('tags_index');
         }
+
         return $this->render(
             'project/tags/delete.html.twig',
             [
@@ -120,7 +172,25 @@ class TagController extends AbstractController
         );
     }
 
-
+    /**
+     * Filtr for tags.
+     *
+     * @param Tag $tag
+     *
+     * @return Response
+     *
+     * @Route(
+     *     "/{id}/filtr",
+     *     name="tag_filtration",
+     *     requirements={"id": "[1-9]\d*"},
+     *     methods={"GET"},
+     * )
+     */
+    public function filtrate(Tag $tag): Response
+    {
+        return $this->render(
+            'project/tags/filtration.html.twig',
+            ['tag' => $tag]
+        );
+    }
 }
-
-?>

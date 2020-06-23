@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'my_account'|trans }}
+{% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/myAccount.css') }}">
+{% endblock  %}
+{% block body %}
+    {% if user is defined and user|length %}
+
+    <div class="center">
+        <h1>{{ 'my_account'|trans }}</h1>
+        <dl>
+            <dt>{{ 'email' }}</dt>
+            <dd>{{ user.email }}</dd>
+        </dl>
+
+        <a class="btn btn-outline-secondary" href="{{ url('edit_email', {'id': user.id}) }}">{{'edit_email'|trans}}</a>
+        <a class="btn btn-outline-secondary" href="{{ url('edit_password', {'id': user.id}) }}">{{'edit_password'|trans}}</a>
+    </div>
+    {% else %}
+        <p>
+            {{ 'message_empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock  %}

@@ -2,13 +2,13 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="pl" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="label_actions">
-                <source>label_actions</source>
-                <target>Dzialania</target>
+            <trans-unit id="my_account">
+                <source>my_account</source>
+                <target>Mój profil</target>
             </trans-unit>
-            <trans-unit id="label_id">
-                <source>label_id</source>
-                <target>Id</target>
+            <trans-unit id="edit_email">
+                <source>edit_email</source>
+                <target>Edytuj email</target>
             </trans-unit>
             <trans-unit id="label_title">
                 <source>label_title</source>
@@ -26,48 +26,48 @@
                 <source>message_empty_list</source>
                 <target>Pusta.</target>
             </trans-unit>
-            <trans-unit id="title_record_list">
-                <source>title_record_list</source>
-                <target>Lista rekordow</target>
+            <trans-unit id="photo_title">
+                <source>photo_title</source>
+                <target>Nazwa zdjęcia</target>
             </trans-unit>
              <trans-unit id="record_not_found">
                  <source>record_not_found</source>
                  <target>Nie ma takiego</target>
              </trans-unit>
-             <trans-unit id="see_record">
-                  <source>see_record</source>
-                  <target>Zobacz rekord</target>
+             <trans-unit id="go_back">
+                  <source>go_back</source>
+                  <target>Wróć</target>
              </trans-unit>
              <trans-unit id="title_record_view">
                    <source>title_record_view</source>
                    <target>Szczegoly elementa %id%</target>
              </trans-unit>
              <trans-unit id="Galleries">
-                                <source>Galleries</source>
-                                <target>Galerie</target>
-                         </trans-unit>
-                         <trans-unit id="One-gallery">
-                                 <source>One-gallery</source>
-                                 <target>Szczegoly galerii</target>
-                         </trans-unit>
-                         <trans-unit id="Welcome to the Photo gallery!">
-                                  <source>Welcome to the Photo gallery!</source>
-                                  <target>Witamy w Galerii</target>
-                         </trans-unit>
-                         <trans-unit id="This-gallery-is-called">
-                                  <source>This-gallery-is-called</source>
-                                  <target>Ta galeria się nazywa:</target>
+                    <source>Galleries</source>
+                    <target>Galerie</target>
+             </trans-unit>
+             <trans-unit id="One-gallery">
+                    <source>One-gallery</source>
+                    <target>Szczegoly galerii</target>
+             </trans-unit>
+             <trans-unit id="Welcome to the Photo gallery!">
+                     <source>Welcome to the Photo gallery!</source>
+                     <target>Witamy w Galerii</target>
+             </trans-unit>
+             <trans-unit id="This-gallery-is-called">
+                      <source>This-gallery-is-called</source>
+                      <target>Ta galeria się nazywa:</target>
                          </trans-unit>
                          <trans-unit id="Here you can see the list of all galleries:">
                                   <source>Here you can see the list of all galleries:</source>
                                   <target>Tutaj lista wszytskich galerii:</target>
                          </trans-unit>
-                          <trans-unit id="action_edit">
-                                   <source>action_edit</source>
+                          <trans-unit id="edit">
+                                   <source>edit</source>
                                    <target>Edytuj</target>
                           </trans-unit>
-                          <trans-unit id="action_delete">
-                                    <source>action_delete</source>
+                          <trans-unit id="delete">
+                                    <source>delete</source>
                                     <target>Usuń</target>
                           </trans-unit>
                             <trans-unit id="action_login">
@@ -95,21 +95,69 @@
                                             <target>Zdjęcia</target>
                                </trans-unit>
                                 <trans-unit id="adding_new_photo">
-                                                                                                    <source>adding_new_photo</source>
-                                                                                                    <target>Dodaj nowe fancyphoto</target>
-                                                                                           </trans-unit>
-                                                                                           <trans-unit id="label_photo">
-                                                                                                                  <source>label_photo</source>
-                                                                                                                   <target>Zdjęcie</target>
-                                                                                                        </trans-unit>
-                                                                                                         <trans-unit id="label_gallery">
-                                                                                                                   <source>label_gallery</source>
-                                                                                                                   <target>Galeria</target>
-                                                                                                         </trans-unit>
-                                                                                                          <trans-unit id="save">
-                                                                                                                   <source>save</source>
-                                                                                                                   <target>Dodaj mnie!</target>
-                                                                                                          </trans-unit>
+                                         <source>adding_new_photo</source>
+                                         <target>Dodaj nowe fancyphoto</target>
+                                </trans-unit>
+                                <trans-unit id="label_photo">
+                                         <source>label_photo</source>
+                                         <target>Zdjęcie</target>
+                                </trans-unit>
+                                <trans-unit id="label_gallery">
+                                         <source>label_gallery</source>
+                                         <target>Galeria</target>
+                                </trans-unit>
+                                <trans-unit id="save">
+                                         <source>save</source>
+                                         <target>Dodaj mnie!</target>
+                                </trans-unit>
+                                <trans-unit id="label_description">
+                                        <source>label_description</source>
+                                        <target>Opis zdjęcia</target>
+                                </trans-unit>
+                                <trans-unit id="add_comment">
+                                        <source>add_comment</source>
+                                        <target>Komentarz:</target>
+                                </trans-unit>
+                                <trans-unit id="photo_tags">
+                                       <source>photo_tags</source>
+                                       <target>Tagi do tego zdjęcia</target>
+                                </trans-unit>
+                                 <trans-unit id="label_none">
+                                       <source>label_none</source>
+                                       <target>Wybierz</target>
+                                 </trans-unit>
+                                 <trans-unit id="users_index">
+                                       <source>users_index</source>
+                                       <target>Uzytkownicy</target>
+                                 </trans-unit>
+                                 <trans-unit id="create_new">
+                                       <source>create_new</source>
+                                       <target>Dodaj!</target>
+                                 </trans-unit>
+                                 <trans-unit id="filtration">
+                                        <source>filtration</source>
+                                        <target>filtruj!</target>
+                                 </trans-unit>
+                                  <trans-unit id="email">
+                                       <source>email</source>
+                                       <target>Email</target>
+                                  </trans-unit>
+                                   <trans-unit id="edit_password">
+                                          <source>edit_password</source>
+                                          <target>Edytuj hasło</target>
+                                   </trans-unit>
+                                    <trans-unit id="edit_my_account">
+                                           <source>edit_my_account</source>
+                                           <target>Edytuj moje dane</target>
+                                    </trans-unit>
+                                    <trans-unit id="action_save">
+                                           <source>action_save</source>
+                                           <target>Zapisz</target>
+                                    </trans-unit>
+                                    <trans-unit id="action_back_to_list">
+                                            <source>action_back_to_list</source>
+                                            <target>Wróć do listy</target>
+                                    </trans-unit>
 
         </body>
     </file>

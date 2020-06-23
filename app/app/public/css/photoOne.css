@@ -23,7 +23,32 @@ body {
 }
 
 #photo {
-    text-align: center;
-    width: 45%;
+    width: 48%;
     height: auto;
+    margin-right:26%;
+    margin-left:26%;
 }
+
+.center {
+    text-align: center;
+}
+
+#comments {
+    width:48%;
+    background-color: aliceblue;
+    margin-right:26%;
+    margin-left:26%;
+    margin-top:20px;
+    margin-bottom:20px;
+
+
+}
+
+#forma {
+    width:48%;
+    margin-right:26%;
+    margin-left:26%;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+

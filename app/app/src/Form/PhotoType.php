@@ -7,7 +7,6 @@ namespace App\Form;
 use App\Entity\Gallery;
 use App\Entity\Photo;
 use App\Form\DataTransformer\TagsDataTransformer;
-use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,14 +17,13 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 /**
  * Class PhotoType
- * @package App\Form
  */
 class PhotoType extends AbstractType
 {
     /**
      * Tags data transformer.
      *
-     * @var \App\Form\DataTransformer\TagsDataTransformer
+     * @var TagsDataTransformer
      */
     private $tagsDataTransformer;
 
@@ -44,17 +42,33 @@ class PhotoType extends AbstractType
      * top most type. Type extensions can further modify the form.
      *
      * @see FormTypeExtensionInterface::buildForm()
+     *
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options):void {
+    public function buildForm(FormBuilderInterface $builder, array $options):void
+    {
         $builder
-            ->add('title', TextType::class)
-            ->add('description', TextType::class)
             ->add(
-            'file',
-            FileType::class,
-            [
+                'title',
+                TextType::class,
+                [
+                    'label' => 'label_title',
+                    'required' => true,
+                ]
+            )
+            ->add(
+                'description',
+                TextType::class,
+                [
+                    'label' => 'label_description',
+                    'required' => true,
+                ]
+            )
+            ->add(
+                'file',
+                FileType::class,
+                [
                 'mapped' => false,
                 'label' => 'label_photo',
                 'required' => true,
@@ -73,14 +87,14 @@ class PhotoType extends AbstractType
                     ]
                 ),
             ]
-        );
+            );
         $builder->add(
             'gallery',
             EntityType::class,
             [
                 'class' => Gallery::class,
                 'choice_label' => function ($gallery) {
-                return $gallery->getNameGallery();
+                    return $gallery->getNameGallery();
                 },
                 'label' => 'label_gallery',
                 'placeholder' => 'label_none',
@@ -100,8 +114,6 @@ class PhotoType extends AbstractType
         $builder->get('tags')->addModelTransformer(
             $this->tagsDataTransformer
         );
-
-
     }
 
     /**
@@ -121,7 +133,4 @@ class PhotoType extends AbstractType
     {
         return 'photo';
     }
-
-
 }
-?>

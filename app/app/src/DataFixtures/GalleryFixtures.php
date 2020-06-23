@@ -1,6 +1,6 @@
 <?php
 /**
- * fixture for Gallery.
+ * Fixture for Gallery.
  */
 namespace App\DataFixtures;
 
@@ -16,7 +16,7 @@ class GalleryFixtures extends AbstractBaseFixtures
     /**
      * Adding gallery name to the table gallery.
      *
-     * @param \Doctrine\Persistence\ObjectManager $manager Persistence object manager
+     * @param ObjectManager $manager Persistence object manager
      */
     public function loadData(ObjectManager $manager): void
     {

@@ -1,37 +1,32 @@
 <?php
+/**
+ * User form.
+ */
 namespace App\Form;
 
-use App\Entity\Gallery;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class GalleryType
+ * Class UserType
  */
-class GalleryType extends AbstractType
+class UserType extends AbstractType
 {
     /**
-     * Builds the form.
-     *
-     * This method is called for each type in the hierarchy starting from the
-     * top most type. Type extensions can further modify the form.
-     *
-     * @see FormTypeExtensionInterface::buildForm()
-     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'name_gallery',
+            'email',
             TextType::class,
             [
-                'label'=> 'label_title',
+                'label' => 'email',
                 'required' => true,
-                'attr' => ['max_length' => 64]
             ]
         );
     }
@@ -41,7 +36,7 @@ class GalleryType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Gallery::class ]);
+        $resolver->setDefaults(['data_class' => User::class ]);
     }
 
     /**
@@ -51,6 +46,6 @@ class GalleryType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'gallery';
+        return 'user';
     }
 }

@@ -3,33 +3,56 @@
 {% block title %}
     {{ 'tags_list'|trans }}
 {% endblock %}
+{% block stylesheets %}
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/lists.css') }}">
+{% endblock  %}
 {% block body %}
-    <h1>{{ 'tags_list'|trans }}</h1>
-    {% if data is defined and data|length %}
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>{{ 'Title'|trans }}</th>
-                <th>{{ 'delete'|trans }}</th>
-                <th>{{ 'edit'|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in data %}
+    <h1 class="center">{{ 'label_tags'|trans }}</h1>
+
+    <div class="center">
+        <a  class="btn btn-outline-dark " href="{{ url('tag_create') }}">{{'create_new'|trans}}</a>
+    </div>
+
+    {% if pagination is defined and pagination.items|length %}
+
+            <table id="table" class="table table-striped">
+                <thead>
                 <tr>
-                    <td>{{ item.title }}</td>
-                    <td><a href="{{ url('tag_delete', {'id': item.id}) }}">{{'delete'|trans}}</a></td>
-                    <td><a href="{{ url('tag_edit', {'id': item.id}) }}">{{'edit'|trans}}</a></td>
+                    <th>{{ 'label_title'|trans }}</th>
+                    <th>{{ 'delete'|trans }}</th>
+                    <th>{{ 'edit'|trans }}</th>
+                    <th>{{ 'filtration'|trans }}</th>
                 </tr>
-            {% endfor %}
+                </thead>
+                <tbody>
+                {% for tag in pagination.items %}
+                    <tr class="table-light">
+                        <td >{{ tag.title }}</td>
+                        <td><a class="btn btn-outline-danger" href="{{ url('tag_delete', {'id': tag.id}) }}">{{'delete'|trans}}</a></td>
+                        <td><a class="btn btn-outline-warning" href="{{ url('tag_edit', {'id': tag.id}) }}">{{'edit'|trans}}</a></td>
+                        <td><a class="btn btn-outline-info" href="{{ url('tag_filtration', {'id': tag.id}) }}">{{'filtration'|trans}}</a></td>
+                    </tr>
+                {% endfor %}
 
 
-            </tbody>
-        </table>
-    {% else %}
-        <p>
-            {{ 'message_empty_list'|trans }}
-        </p>
-    {% endif %}
+                </tbody>
+            </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center text-dark">
+
+                {{ knp_pagination_render(pagination) }}
+
+            </ul>
+        </nav>
+        {% else %}
+            <p>
+                {{ 'message_empty_list'|trans }}
+            </p>
+        {% endif %}
+
+
+
+
 {% endblock  %}

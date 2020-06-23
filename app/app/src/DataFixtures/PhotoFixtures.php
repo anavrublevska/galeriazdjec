@@ -10,13 +10,13 @@ use Doctrine\Persistence\ObjectManager;
 
 /**
  * Class PhotoFixtures.
- *
- * @package App\DataFixtures
  */
 class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
 
     /**
+     * Load data photo.
+     *
      * @param ObjectManager $manager
      */
     public function loadData(ObjectManager $manager): void
@@ -26,14 +26,14 @@ class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInte
             $photo->setTitle($this->faker->word);
             $photo->setDescription($this->faker->sentence);
             $input = array("a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg", "f.jpeg");
-            $numb=rand(0,5);
-            $randy=$input[$numb];
+            $numb = rand(0, 5);
+            $randy = $input[$numb];
             $photo->setLink($randy);
             $photo->setGallery($this->getRandomReference('galleries'));
             $photo->setAuthor($this->getRandomReference('users'));
             $tags = $this->getRandomReferences(
                 'tags',
-                $this->faker->numberBetween(0,4)
+                $this->faker->numberBetween(0, 4)
             );
             foreach ($tags as $tag) {
                 $photo->addTag($tag);
@@ -56,5 +56,4 @@ class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInte
     {
         return [GalleryFixtures::class, TagFixtures::class, UserFixtures::class];
     }
-
 }

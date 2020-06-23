@@ -78,13 +78,13 @@ class Photo
      */
     private $comments;
 
-
-
+    /**
+     * Photo constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
-
     }
 
     /**
@@ -92,7 +92,6 @@ class Photo
      *
      * @return int|null
      */
-
     public function getId(): ?int
     {
         return $this->id;
@@ -116,7 +115,6 @@ class Photo
     public function setLink(string $link): void
     {
         $this->link = $link;
-
     }
 
     /**
@@ -137,7 +135,6 @@ class Photo
     public function setTitle(string $title): void
     {
         $this->title = $title;
-
     }
 
     /**
@@ -158,7 +155,6 @@ class Photo
     public function setDescription(?string $description): void
     {
         $this->description = $description;
-
     }
 
     /**
@@ -175,6 +171,7 @@ class Photo
      * Set gallery.
      *
      * @param Gallery|null $gallery
+     *
      * @return $this
      */
     public function setGallery(?Gallery $gallery): self
@@ -185,6 +182,8 @@ class Photo
     }
 
     /**
+     * Getter for tags.
+     *
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -193,6 +192,8 @@ class Photo
     }
 
     /**
+     * Add tag.
+     *
      * @param Tag $tag
      */
     public function addTag(Tag $tag): void
@@ -200,10 +201,11 @@ class Photo
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
         }
-
     }
 
     /**
+     * Remove tag.
+     *
      * @param Tag $tag
      */
     public function removeTag(Tag $tag): void
@@ -211,7 +213,6 @@ class Photo
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
         }
-
     }
 
     /**
@@ -228,8 +229,6 @@ class Photo
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-
     }
 
     /**
@@ -241,7 +240,10 @@ class Photo
     }
 
     /**
+     * Add comment.
+     *
      * @param Comment $comment
+     *
      * @return $this
      */
     public function addComment(Comment $comment): self
@@ -249,14 +251,16 @@ class Photo
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
             $comment->setPhoto($this);
-
         }
 
         return $this;
     }
 
     /**
+     * Remove comment.
+     *
      * @param Comment $comment
+     *
      * @return $this
      */
     public function removeComment(Comment $comment): self
@@ -271,9 +275,4 @@ class Photo
 
         return $this;
     }
-
-
-
-
-
 }

@@ -8,20 +8,18 @@ use App\Entity\Comment;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
 /**
  * Class CommentFixtures.
- *
  */
 class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
+     * Load data.
+     *
      * @param ObjectManager $manager
      */
-
     public function loadData(ObjectManager $manager): void
     {
-
         $this->createMany(50, 'comments', function ($i) {
             $comment = new Comment();
             $comment->setContent($this->faker->sentence);
@@ -37,12 +35,12 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
     }
 
     /**
+     * Get dependencies.
+     *
      * @return array
      */
     public function getDependencies(): array
     {
         return [PhotoFixtures::class, UserFixtures::class];
     }
-
 }
-

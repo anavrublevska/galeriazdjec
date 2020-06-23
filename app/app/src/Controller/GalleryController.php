@@ -19,17 +19,18 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class GalleryController.
  *
- * @package App\Controller
- *
  * @Route("/galleries")
  */
 
-class GalleryController extends AbstractController{
-
+class GalleryController extends AbstractController
+{
     /**
-     * @param Request $request
-     * @param GalleryRepository $galleryRepository
+     * Index of gallery.
+     *
+     * @param Request            $request
+     * @param GalleryRepository  $galleryRepository
      * @param PaginatorInterface $paginator
+     *
      * @return Response
      *
      * @Route(
@@ -38,8 +39,8 @@ class GalleryController extends AbstractController{
      *     methods={"GET"},
      * )
      */
-
-    public function index(Request $request, GalleryRepository $galleryRepository, PaginatorInterface $paginator): Response{
+    public function index(Request $request, GalleryRepository $galleryRepository, PaginatorInterface $paginator): Response
+    {
         $pagination = $paginator->paginate(
             $galleryRepository->queryAll(),
             $request->query->getInt('page', 1),
@@ -52,9 +53,11 @@ class GalleryController extends AbstractController{
         );
     }
 
-
     /**
+     * Gallery show.
+     *
      * @param Gallery $gallery
+     *
      * @return Response
      *
      * @Route(
@@ -64,20 +67,22 @@ class GalleryController extends AbstractController{
      *     requirements={"id": "[1-9]\d*"},
      * )
      */
-
     public function show(Gallery $gallery): Response
     {
         return $this->render(
             'project/gallery/show.html.twig',
             ['gallery' => $gallery]
-
         );
     }
 
     /**
-     * @param Request             $request
-     * @param GalleryRepository   $galleryRepository
+     * Create gallery.
+     *
+     * @param Request           $request
+     * @param GalleryRepository $galleryRepository
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
@@ -87,7 +92,6 @@ class GalleryController extends AbstractController{
      *     name="gallery_create",
      * )
      */
-
     public function create(Request $request, GalleryRepository $galleryRepository): Response
     {
         $gallery = new Gallery();
@@ -101,6 +105,7 @@ class GalleryController extends AbstractController{
 
             return $this->redirectToRoute('galleries_index');
         }
+
         return $this->render(
             'project/gallery/create.html.twig',
             ['form' => $form->createView()]
@@ -108,10 +113,14 @@ class GalleryController extends AbstractController{
     }
 
     /**
+     * Edit gallery.
+     *
      * @param Request           $request
      * @param Gallery           $gallery
      * @param GalleryRepository $galleryRepository
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
@@ -127,13 +136,14 @@ class GalleryController extends AbstractController{
         $form = $this->createForm(GalleryType::class, $gallery, ['method' => 'PUT']);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $galleryRepository->save($gallery);
 
             $this->addFlash('info', 'Wow you did a great edit!');
 
             return $this->redirectToRoute('galleries_index');
         }
+
         return $this->render(
             'project/gallery/edit.html.twig',
             [
@@ -141,14 +151,17 @@ class GalleryController extends AbstractController{
                 'gallery' => $gallery,
             ]
         );
-
     }
 
     /**
+     * Delete gallery.
+     *
      * @param Request           $request
      * @param Gallery           $gallery
      * @param GalleryRepository $galleryRepository
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
@@ -159,7 +172,6 @@ class GalleryController extends AbstractController{
      *     name="gallery_delete",
      * )
      */
-
     public function delete(Request $request, Gallery $gallery, GalleryRepository $galleryRepository): Response
     {
         if ($gallery->getPhotos()->count()) {
@@ -172,15 +184,14 @@ class GalleryController extends AbstractController{
 
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
-
         }
-
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $galleryRepository->delete($gallery);
             $this->addFlash('warning', 'Oh no you deleted a gallery');
 
             return $this->redirectToRoute('galleries_index');
         }
+
         return $this->render(
             'project/gallery/delete.html.twig',
             [
@@ -189,5 +200,4 @@ class GalleryController extends AbstractController{
             ]
         );
     }
-
 }

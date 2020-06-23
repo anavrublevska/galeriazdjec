@@ -5,38 +5,34 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Gallery;
 use App\Entity\Photo;
 use App\Form\CommentType;
 use App\Form\PhotoType;
 use App\Repository\CommentRepository;
 use App\Repository\PhotoRepository;
 use App\Service\FileUploader;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-
 /**
  * Class PhotoController.
- *
- * @package App\Controller
  *
  * @Route("/photos")
  */
 class PhotoController extends AbstractController
 {
     /**
-     * @var \App\Repository\PhotoRepository
+     * @var PhotoRepository
      */
     private $photoRepository;
     /**
-     * @var \App\Service\FileUploader
+     * @var FileUploader
      */
     private $fileUploader;
 
@@ -44,9 +40,8 @@ class PhotoController extends AbstractController
      * PhotoController constructor.
      *
      * @param PhotoRepository $photoRepository
-     * @param FileUploader $fileUploader
+     * @param FileUploader    $fileUploader
      */
-
     public function __construct(PhotoRepository $photoRepository, FileUploader $fileUploader)
     {
         $this->photoRepository = $photoRepository;
@@ -60,8 +55,8 @@ class PhotoController extends AbstractController
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/create",
@@ -83,33 +78,25 @@ class PhotoController extends AbstractController
             $response = new Response();
 
 
-            $a='a'.uniqid().'.'.$photoFilename->guessExtension();
-//            try {
-                $photoFilename->move(
-                    $this->getParameter('photos_directory'),
-                    $a
-                );
-//            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
-//            }
-//            $photo->setTitle('Hello');
-//            $photo->setDescription('lorem ipsum');
+            $a = 'a'.uniqid().'.'.$photoFilename->guessExtension();
+            $photoFilename->move(
+                $this->getParameter('photos_directory'),
+                $a
+            );
+
             $photo->setLink($a);
 
 
             $this->photoRepository->save($photo);
-//            $response->setContent('<img src="/uploads/photos/'.$a.'">');
-//            return $response;
             $this->addFlash('success', 'Yeeeep! You have got a new photoooo!');
 
             return $this->redirectToRoute('photos_index');
-
         }
+
         return $this->render(
             'project/photos/form.html.twig',
             ['form' => $form->createView()]
         );
-
     }
     /**
      * Index photos.
@@ -117,6 +104,7 @@ class PhotoController extends AbstractController
      * @param Request            $request
      * @param PhotoRepository    $photoRepository
      * @param PaginatorInterface $paginator
+     *
      * @return Response
      *
      * @Route(
@@ -140,10 +128,17 @@ class PhotoController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @param Photo $photo
+     * Show comments.
+     *
+     * @param Request           $request
+     * @param Photo             $photo
      * @param CommentRepository $commentRepository
+     *
      * @return Response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
      * @Route(
      *     "/{id}",
      *     name="photo_show",
@@ -156,15 +151,13 @@ class PhotoController extends AbstractController
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-        $id=$photo->getId();
+        $id = $photo->getId();
         if ($form->isSubmitted() && $form->isValid()) {
-
             $comment->setUser($this->getUser());
             $comment->setPhoto($photo);
             $commentRepository->save($comment);
 
-
-            return $this->redirectToRoute('photo_show', ['id'=> $id]);
+            return $this->redirectToRoute('photo_show', ['id' => $id]);
         }
 
 
@@ -181,14 +174,14 @@ class PhotoController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request $request
-     * @param Photo $photo
+     * @param Request         $request
+     * @param Photo           $photo
      * @param PhotoRepository $photoRepository
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/edit",
@@ -205,7 +198,7 @@ class PhotoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $photoFilename = $form->get('file')->getData();
-            $a='a'.uniqid().'.'.$photoFilename->guessExtension();
+            $a = 'a'.uniqid().'.'.$photoFilename->guessExtension();
             $photoFilename->move(
                 $this->getParameter('photos_directory'),
                 $a
@@ -240,8 +233,8 @@ class PhotoController extends AbstractController
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/delete",
@@ -273,10 +266,4 @@ class PhotoController extends AbstractController
             ]
         );
     }
-
-
-
-
 }
-
-?>

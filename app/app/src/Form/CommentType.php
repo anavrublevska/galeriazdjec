@@ -36,6 +36,7 @@ class CommentType extends AbstractType
             'content',
             TextType::class,
             [
+                'label' => 'add_comment',
                 'required' => true,
                 'attr' => ['max_length' => 255],
             ]
@@ -45,7 +46,7 @@ class CommentType extends AbstractType
     /**
      * Configures the options for this type.
      *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver The resolver for the options
+     * @param OptionsResolver $resolver The resolver for the options
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

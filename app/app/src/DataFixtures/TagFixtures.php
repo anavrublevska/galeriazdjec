@@ -18,6 +18,8 @@ class TagFixtures extends AbstractBaseFixtures
 {
 
     /**
+     * Load data tag.
+     *
      * @param ObjectManager $manager
      */
     public function loadData(ObjectManager $manager): void

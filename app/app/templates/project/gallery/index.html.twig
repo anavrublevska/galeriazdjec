@@ -14,7 +14,10 @@
 
     <h1>{{ 'Welcome to the Photo gallery!'|trans }}</h1>
     <h2>{{ 'Here you can see the list of all galleries:'|trans }}</h2>
-    <div><a id="createbutton" href="{{ url('gallery_create') }} " class="btn btn-outline-dark">Create new</a></div>
+    {% if is_granted("ROLE_ADMIN")  %}
+        <div><a id="createbutton" href="{{ url('gallery_create') }} " class="btn btn-outline-dark">{{ 'create_new'|trans }}</a></div>
+    {% endif %}
+
     {% if pagination is defined and pagination.items|length %}
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center text-dark">
@@ -28,18 +31,18 @@
 
                 {% for gallery in pagination %}
                     <tr class="galleryrow">
+
                         <td class="gallerylist"><a href="{{ url('gallery_show', {'id': gallery.id}) }}" class="list-group-item list-group-item-action list-group-item-bg-light">{{ gallery.nameGallery }}</a>
-                            <a href="{{ url('gallery_edit', {'id': gallery.id}) }}" title="{{ 'action_edit'|trans }}" class="btn btn-outline-light">{{ 'action_edit'|trans }}</a>
-                        {% if not gallery.photos|length %}
+                      {% if is_granted("ROLE_ADMIN")  %}
+                        <a href="{{ url('gallery_edit', {'id': gallery.id}) }}" title="{{ 'edit'|trans }}" class="btn btn-outline-light">{{ 'edit'|trans }}</a>
+                          {% if not gallery.photos|length %}
 
-                            <a href="{{ url('gallery_delete', {id: gallery.id}) }}" title="{{ 'action_delete'|trans }}" class="btn btn-outline-dark">
-                                {{ 'action_delete'|trans }}
+                            <a href="{{ url('gallery_delete', {id: gallery.id}) }}" title="{{ 'delete'|trans }}" class="btn btn-outline-dark">
+                                {{ 'delete'|trans }}
                             </a>
+                           {% endif %}
+                    </tr>
                         {% endif %}
-                    </tr>
-                    <tr>
-
-                    </tr>
                 {% endfor %}
             </table>
         </div>

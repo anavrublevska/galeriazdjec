@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'tag_edit'|trans({'%id%': tag.id|default('')}) }}
+    {{ 'edit'|trans({'%id%': tag.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'tag_edit'|trans({'%id%': tag.id|default('')}) }}</h1>
+    <h1>{{ 'edit'|trans({'%id%': tag.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'PUT', action: url('tag_edit', {id: tag.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">

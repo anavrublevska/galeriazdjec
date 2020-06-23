@@ -18,7 +18,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                {% if is_granted("ROLE_USER") %}
+
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('galleries_index') }}">{{'Galleries'|trans}}</a>
@@ -26,14 +26,24 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('photos_index') }}">{{'photos'|trans}}</a>
                         </li>
+                        {% if is_granted("ROLE_USER") %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('photo_create') }}">{{'photo_create'|trans}}</a>
                         </li>
+
                         {% if is_granted("ROLE_ADMIN") %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('tags_index') }}">{{'tags_index'|trans}}</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('users_index') }}">{{'users_index'|trans}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('tags_index') }}">{{'label_tags'|trans}}</a>
+                            </li>
                         {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('my_account', {'id': app.user.id})}}">{{'my_account'|trans}}</a>
+                            </li>
+
+
                     </ul>
                     <span class="navbar-text">
 
@@ -44,11 +54,11 @@
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                 <div>{{ app.user.email }}</div>
                 <div>
-                    <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+                    <a class="btn btn-outline-dark" href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
                 </div>
             {% else %}
                 <div>
-                    <a href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
+                    <a class="btn btn-outline-dark" href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
                 </div>
             {% endif %}
         </nav>

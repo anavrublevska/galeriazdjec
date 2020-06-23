@@ -6,6 +6,8 @@ namespace App\Repository;
 
 use App\Entity\Gallery;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
@@ -61,8 +63,8 @@ class GalleryRepository extends ServiceEntityRepository
      * Save record.
      *
      * @param Gallery $gallery
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Gallery $gallery): void {
         $this->_em->persist($gallery);
@@ -73,8 +75,8 @@ class GalleryRepository extends ServiceEntityRepository
      * Delete record.
      *
      * @param Gallery $gallery
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
 
     public function delete(Gallery $gallery): void{
@@ -82,32 +84,4 @@ class GalleryRepository extends ServiceEntityRepository
         $this->_em->flush($gallery);
     }
 
-    // /**
-    //  * @return Gallery[] Returns an array of Gallery objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Gallery
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

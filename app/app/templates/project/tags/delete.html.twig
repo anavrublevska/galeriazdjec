@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    {{ 'tag_delete'|trans }}
+    {{ 'delete'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'tag_delete'|trans }}</h1>
+    <h1>{{ 'delete'|trans }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('tag_delete', {id:  tag.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">

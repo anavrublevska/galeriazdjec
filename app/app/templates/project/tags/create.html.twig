@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
-    {{ 'edit'|trans({'%id%': gallery.id|default('')}) }}
+    {{ 'create_new'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'edit'|trans({'%id%': gallery.id|default('')}) }}</h1>
-    {{ form_start(form, { method: 'PUT', action: url('gallery_edit', {id: gallery.id}) }) }}
+    <h1>{{ 'create_new'|trans }}</h1>
+    {{ form_start(form, { method: 'POST', action: url('tag_create') }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">
         <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-primary" />
     </div>
     <div class="form-group row float-sm-left">
-        <a href="{{ url('galleries_index') }}" class="btn btn-link">
+        <a href="{{ url('tags_index') }}" class="btn btn-link">
             {{ 'action_back_to_list'|trans }}
         </a>
     </div>

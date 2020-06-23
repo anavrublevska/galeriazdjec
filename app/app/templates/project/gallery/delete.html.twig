@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'gallery_delete'|trans({'%id%': gallery.id|default('')}) }}
+    {{ 'delete'|trans({'%id%': gallery.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'gallery_delete'|trans({'%id%':  gallery.id|default('')}) }}</h1>
+    <h1>{{ 'delete'|trans({'%id%':  gallery.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('gallery_delete', {id:  gallery.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">

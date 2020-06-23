@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Entity user.
+ */
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -8,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(
@@ -77,6 +80,9 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -115,6 +121,8 @@ class User implements UserInterface
     /**
      * A visual identifier that represents this user.
      *
+     * @return string
+     *
      * @see UserInterface
      */
     public function getUsername(): string
@@ -123,6 +131,10 @@ class User implements UserInterface
     }
 
     /**
+     * Getter for roles.
+     *
+     * @return array
+     *
      * @see UserInterface
      */
     public function getRoles(): array
@@ -140,10 +152,13 @@ class User implements UserInterface
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
-
     }
 
     /**
+     * Getter for passworm.
+     *
+     * @return string
+     *
      * @see UserInterface
      */
     public function getPassword(): string
@@ -157,7 +172,6 @@ class User implements UserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
-
     }
 
     /**
@@ -185,6 +199,13 @@ class User implements UserInterface
         return $this->comments;
     }
 
+    /**
+     * Add comment.
+     *
+     * @param Comment $comment
+     *
+     * @return $this
+     */
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -195,6 +216,13 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Remove comment.
+     *
+     * @param Comment $comment
+     *
+     * @return $this
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {
