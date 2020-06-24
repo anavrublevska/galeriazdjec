@@ -1,24 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'comment_delete'|trans({'%id%': comment.id|default('')}) }}
+    {{ 'delete'|trans({'%id%': comment.id|default('')}) }}
 {% endblock %}
 {% block stylesheets %}
-    {#        <link rel="stylesheet" href="{{ asset('css/photosForm.css') }}">#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/photosForm.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/deleting.css') }}">
 {% endblock %}
 {% block body %}
-    <h1>{{ 'comment_delete'|trans({'%id%':  comment.id|default('')}) }}</h1>
-    {{ form_start(form, { method: 'DELETE', action: url('comment_delete', {id: comment.id, photo_id:comment.photo.id }) }) }}
-    {{ form_widget(form) }}
-    <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-primary" />
+    <div>
+    <a id="back" href="{{ url('photo_show', {id: comment.photo.id}) }}" class="btn btn-outline-secondary">
+        {{ 'action_back_to_list'|trans }}
+    </a>
     </div>
-    <div class="form-group row float-sm-left">
-        <a href="{{ url('photo_show', {id: comment.photo.id}) }}" class="btn btn-link">
-            {{ 'action_back_to_list'|trans }}
-        </a>
+
+    <div id="form">
+        <h1>{{ 'delete'|trans({'%id%':  comment.id|default('')}) }}</h1>
+        {{ form_start(form, { method: 'DELETE', action: url('comment_delete', {id: comment.id, photo_id:comment.photo.id }) }) }}
+        {{ form_widget(form) }}
+        <h3>{{ 'sure?'|trans }}</h3>
+        <div id="save">
+            <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-outline-danger"  />
+        </div>
+
+        {{ form_end(form) }}
     </div>
-    {{ form_end(form) }}
+
 {% endblock %}

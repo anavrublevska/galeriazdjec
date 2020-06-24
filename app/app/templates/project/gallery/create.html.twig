@@ -4,16 +4,17 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'gallery_create'|trans }}</h1>
+    <h1>{{ 'create_new'|trans }}</h1>
+    <div>
+    <a href="{{ url('galleries_index') }}" class="btn btn-outline-secondary">
+        {{ 'action_back_to_list'|trans }}
+    </a>
+</div>
     {{ form_start(form, { method: 'POST', action: url('gallery_create') }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-primary" />
+        <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-outline-success" />
     </div>
-    <div class="form-group row float-sm-left">
-        <a href="{{ url('galleries_index') }}" class="btn btn-link">
-            {{ 'action_back_to_list'|trans }}
-        </a>
-    </div>
+
     {{ form_end(form) }}
 {% endblock %}

@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Photo;
 use App\Form\CommentType;
+use App\Form\PhotoEditType;
 use App\Form\PhotoType;
 use App\Repository\CommentRepository;
 use App\Repository\PhotoRepository;
@@ -83,9 +84,9 @@ class PhotoController extends AbstractController
                 $this->getParameter('photos_directory'),
                 $a
             );
+            $photo->setCreatedAt(new \DateTime());
 
             $photo->setLink($a);
-
 
             $this->photoRepository->save($photo);
             $this->addFlash('success', 'Yeeeep! You have got a new photoooo!');
@@ -192,22 +193,11 @@ class PhotoController extends AbstractController
      */
     public function edit(Request $request, Photo $photo, PhotoRepository $photoRepository): Response
     {
-        $form = $this->createForm(PhotoType::class, $photo, ['method' => 'PUT']);
+        $form = $this->createForm(PhotoEditType::class, $photo, ['method' => 'PUT']);
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $photoFilename = $form->get('file')->getData();
-            $a = 'a'.uniqid().'.'.$photoFilename->guessExtension();
-            $photoFilename->move(
-                $this->getParameter('photos_directory'),
-                $a
-            );
-            $photo->setLink($a);
-
-//
-//            $this->photoRepository->save($photo);
-
             $photoRepository->save($photo);
 
             $this->addFlash('warning', 'photo_updated_successfully');

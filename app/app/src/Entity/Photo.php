@@ -57,7 +57,7 @@ class Photo
      * @Assert\Type(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *     min="3",
+     *     min="10",
      *     max="255",
      * )
      */

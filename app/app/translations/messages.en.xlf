@@ -147,13 +147,42 @@
                           <target>Edit my data</target>
                    </trans-unit>
                     <trans-unit id="action_save">
-                                                              <source>action_save</source>
-                                                              <target>Save</target>
-                                                       </trans-unit>
-                                                       <trans-unit id="action_back_to_list">
-                                                               <source>action_back_to_list</source>
-                                                               <target>Back to list</target>
-                                                       </trans-unit>
+                           <source>action_save</source>
+                           <target>Save</target>
+                    </trans-unit>
+                    <trans-unit id="action_back_to_list">
+                           <source>action_back_to_list</source>
+                           <target>Back to list</target>
+                    </trans-unit>
+                    <trans-unit id="Agree terms">
+                            <source>Agree terms</source>
+                            <target>Agree terms</target>
+                    </trans-unit>
+
+                    <trans-unit id="didnt_register_yet?">
+                            <source>didnt_register_yet?</source>
+                            <target>I don't have an account</target>
+                    </trans-unit>
+                     <trans-unit id="sure?">
+                            <source>sure?</source>
+                            <target>Are you sure?</target>
+                     </trans-unit>
+                     <trans-unit id="i_am">
+                            <source>i_am</source>
+                            <target>I am     </target>
+                     </trans-unit>
+                     <trans-unit id="photos_for_tag:">
+                             <source>photos_for_tag:</source>
+                             <target>Photos for tag:</target>
+                     </trans-unit>
+                             <trans-unit id="First">
+                             <source>First</source>
+                     <target>Password</target>
+                     </trans-unit>
+                     <trans-unit id="Second">
+                             <source>Second</source>
+                              <target>Repeat</target>
+                     </trans-unit>
 
 
         </body>

@@ -10,18 +10,24 @@ h1{
 
 }
 
-
-body {
-    background-color: #adbabd;
+#back {
+    margin-top: 20px;
 }
 
-form {
+
+#save {
+    width:20%;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top:40px;
+}
+
+#form {
     text-align: center;
-    background-color: #4f5d75;
-    margin-top:30px;
-    margin-left: 20%;
-    margin-right: 20%;
-    width:60%;
+    margin-left: 30%;
+    margin-right: 30%;
+    width:40%;
+    height:60%;
     padding:30px;
 }
 

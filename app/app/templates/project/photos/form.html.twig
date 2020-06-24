@@ -3,9 +3,7 @@
     {{ 'adding_new_photo'|trans }}
 {% endblock %}
     {% block stylesheets %}
-{#        <link rel="stylesheet" href="{{ asset('css/photosForm.css') }}">#}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/photosForm.css') }}">
     {% endblock %}
 
 
@@ -18,7 +16,7 @@
     {{ form_row(form.file) }}
 
 <div  class="form-group row float-sm-right">
-    <input type="submit" value="{{ 'save'|trans }}" class="btn btn-light">
+    <input type="submit" value="{{ 'save'|trans }}" class="btn btn-outline-success">
 </div>
 
 {{ form_end(form) }}

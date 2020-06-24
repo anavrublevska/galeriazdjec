@@ -9,10 +9,10 @@
     {{ form_start(form, { method: 'PUT', action: url('tag_edit', {id: tag.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-primary" />
+        <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-outline-success" />
     </div>
     <div class="form-group row float-sm-left">
-        <a href="{{ url('tags_index') }}" class="btn btn-link">
+        <a href="{{ url('tags_index') }}" class="btn btn-outline-secondary">
             {{ 'action_back_to_list'|trans }}
         </a>
     </div>

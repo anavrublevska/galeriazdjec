@@ -158,6 +158,35 @@
                                             <source>action_back_to_list</source>
                                             <target>Wróć do listy</target>
                                     </trans-unit>
+                                    <trans-unit id="Agree terms">
+                                            <source>Agree terms</source>
+                                            <target>Zgadzam się</target>
+                                    </trans-unit>
+                                    <trans-unit id="didnt_register_yet?">
+                                            <source>didnt_register_yet?</source>
+                                            <target>Jeszcze nie mam konta</target>
+                                    </trans-unit>
+                                     <trans-unit id="sure?">
+                                             <source>sure?</source>
+                                             <target>Na pewno?</target>
+                                      </trans-unit>
+                                      <trans-unit id="i_am">
+                                              <source>i_am</source>
+                                              <target>Jestem     </target>
+                                     </trans-unit>
+                                     <trans-unit id="photos_for_tag:">
+                                             <source>photos_for_tag:</source>
+                                             <target>Dla tagu:</target>
+                                     </trans-unit>
+                                             <trans-unit id="First">
+                                             <source>First</source>
+                                     <target>Hasło</target>
+                                     </trans-unit>
+                                     <trans-unit id="Second">
+                                             <source>Second</source>
+                                             <target>Powtórz</target>
+                                     </trans-unit>
+
 
         </body>
     </file>

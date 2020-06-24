@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'tag_filtration'|trans({'%id%': tag.id|default('')}) }}
+    {{ 'filtration'|trans({'%id%': tag.id|default('')}) }}
 {% endblock %}
 {% block header %}
     {% block stylesheets %}
@@ -15,9 +15,9 @@
 
 
 {% block body %}
-    <h1>{{ 'tag_filtration'|trans }}</h1>
+    <h1>{{ 'filtration'|trans }}</h1>
     <h2>{{ 'photos_for_tag:'|trans}} {{  tag.title }}</h2>
-    <a class="btn btn-outline-dark" href="{{ url('tags_index') }}">{{ 'go_back'|trans }}</a>
+    <a class="btn btn-outline-dark" href="{{ url('photos_index') }}">{{ 'go_back'|trans }}</a>
 
     {% if tag is defined and tag|length %}
         <div id="photo_gallery">
