@@ -24,6 +24,7 @@ class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInte
         $this->createMany(30, 'photos', function ($i) {
             $photo = new Photo();
             $photo->setTitle($this->faker->word);
+            $photo->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $photo->setDescription($this->faker->sentence);
             $input = array("a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg", "f.jpeg");
             $numb = rand(0, 5);

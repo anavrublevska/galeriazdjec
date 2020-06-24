@@ -4,15 +4,12 @@
  */
 namespace App\DataFixtures;
 
-
 use App\Entity\Tag;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 /**
  * Class PhotoFixtures.
- *
- * @package App\DataFixtures
  */
 class TagFixtures extends AbstractBaseFixtures
 {
@@ -34,6 +31,4 @@ class TagFixtures extends AbstractBaseFixtures
 
         $manager->flush();
     }
-
-
 }

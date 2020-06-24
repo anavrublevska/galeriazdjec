@@ -39,30 +39,8 @@ class PhotoRepository extends ServiceEntityRepository
     }
 
     /**
-     * Query all.
-     *
-     * @return QueryBuilder
-     */
-    public function queryAll(): QueryBuilder
-    {
-        return $this->getOrCreateQueryBuilder()
-            ->innerJoin('photo.gallery', 'gallery')
-            ->orderBy('photo.id', 'DESC');
-    }
-
-    /**
-     * Get or create query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder
-     * @return QueryBuilder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder=null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('photo');
-    }
-
-    /**
      * @param Photo $photo
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -74,13 +52,36 @@ class PhotoRepository extends ServiceEntityRepository
 
     /**
      * @param Photo $photo
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function delete(Photo $photo): void {
+    public function delete(Photo $photo): void
+    {
         $this->_em->remove($photo);
         $this->_em->flush($photo);
     }
+    /**
+     * Query all.
+     *
+     * @return QueryBuilder
+     */
+    public function queryAll(): QueryBuilder
+    {
+        return $this->getOrCreateQueryBuilder()
+            ->innerJoin('photo.gallery', 'gallery')
+            ->orderBy('photo.createdAt', 'DESC');
+    }
 
-
+    /**
+     * Get or create query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder
+     *
+     * @return QueryBuilder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('photo');
+    }
 }

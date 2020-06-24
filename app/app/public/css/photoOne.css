@@ -43,6 +43,20 @@ body {
 
 
 }
+#back {
+    margin-top:10px;
+}
+#frame {
+    border:1px solid black;
+    background-color: aliceblue;
+    paddind:2%;
+    width:48%;
+    margin-right:26%;
+    margin-left:26%;
+    margin-top:20px;
+    margin-bottom:20px;
+
+}
 
 #forma {
     width:48%;

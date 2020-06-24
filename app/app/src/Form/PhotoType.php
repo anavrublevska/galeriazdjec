@@ -86,7 +86,7 @@ class PhotoType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid JPG document',
                     ]
                 ),
-            ]
+                ]
             );
         $builder->add(
             'gallery',
@@ -119,7 +119,6 @@ class PhotoType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['data_class' => Photo::class]);
@@ -128,7 +127,6 @@ class PhotoType extends AbstractType
     /**
      * @return string
      */
-
     public function getBlockPrefix(): string
     {
         return 'photo';

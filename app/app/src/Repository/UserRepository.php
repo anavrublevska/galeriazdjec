@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * User Repository.
+ */
 namespace App\Repository;
 
 use App\Entity\User;
@@ -52,17 +54,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Get or create query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder
-     * @return QueryBuilder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('user');
-    }
-
-    /**
      * @param UserInterface $user
      * @param string        $newEncodedPassword
      *
@@ -86,9 +77,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function save(User $user): void {
+    public function save(User $user): void
+    {
         $this->_em->persist($user);
         $this->_em->flush($user);
     }
 
+    /**
+     * Get or create query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder
+     *
+     * @return QueryBuilder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('user');
+    }
 }

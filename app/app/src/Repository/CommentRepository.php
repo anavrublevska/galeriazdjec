@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Comment Repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Comment;
@@ -16,6 +18,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructor.
+     *
+     * CommentRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
@@ -29,7 +37,8 @@ class CommentRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function save(Comment $comment): void {
+    public function save(Comment $comment): void
+    {
         $this->_em->persist($comment);
         $this->_em->flush($comment);
     }
@@ -40,9 +49,9 @@ class CommentRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function delete(Comment $comment): void{
+    public function delete(Comment $comment): void
+    {
         $this->_em->remove($comment);
         $this->_em->flush($comment);
     }
-
 }

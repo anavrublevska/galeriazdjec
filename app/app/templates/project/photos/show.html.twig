@@ -9,33 +9,34 @@
     <link rel="stylesheet" href="{{ asset('css/photoOne.css') }}">
 {% endblock  %}
 {% block body %}
-    <h1>{{ 'see_this_photo'|trans({'%id%': photo.id|default('')}) }}</h1>
+    <div id="back">
+        <a class="btn btn-outline-dark" href="{{ url('photos_index') }}">{{ 'go_back'|trans }}</a>
+    </div>
+
+    <h1>{{ 'i_am    ' |trans }}{{ photo.title }}</h1>
     <div class="center">
         <a class="btn btn-outline-danger" href="{{ url('photo_edit', {'id': photo.id}) }}">{{'edit'|trans}}</a>
         <a class="btn btn-outline-light" href="{{ url('photo_delete', {'id': photo.id}) }}">{{'delete'|trans}}</a>
     </div>
-    <a class="btn btn-outline-dark" href="{{ url('photos_index') }}">{{ 'go_back'|trans }}</a>
+
     {% if is_granted("ROLE_ADMIN")  %}
 
     {% endif %}
     {% if photo is defined and photo|length %}
         <div>
-            <dl>
-                <dt class="center">{{ 'label_title'|trans }}</dt>
-                <dd class="center">{{ photo.title }}</dd>
-                <dt class="center">{{ 'label_description'|trans }}</dt>
-                <dd class="center">{{ photo.description }}</dd>
+            <div id="frame">
+                <dl>
+                    <dt class="center">{{ 'label_description'|trans }}</dt>
+                    <dd class="center">{{ photo.description }}</dd>
 
                     <dt class="center">{{ 'label_tags'|trans }}</dt>
                     {% for tags in photo.tags %}
-                    <dd class="center"><a href="{{ url('tag_filtration', {'id': tags.id}) }}">{{ tags.title }}</a></dd>
+                        <dd class="center"><a href="{{ url('tag_filtration', {'id': tags.id}) }}">{{ tags.title }}</a></dd>
                     {% endfor %}
 
+                </dl>
+            </div>
 
-
-
-
-            </dl>
             <img id="photo" class="center" src="/uploads/photos/{{ photo.link }}" >
 
 
@@ -46,8 +47,7 @@
                         <h6 >{{ comments.user.email }}</h6>
                         <p>{{ comments.content }}</p>
                         {% if is_granted("ROLE_ADMIN")  %}
-                            <a href="{{ url('comment_delete', {id: comments.id, photo_id: photo.id}) }}">{{'delete'|trans}}</a>
-                            <a href="{{ url('comment_edit', {id: comments.id, photo_id: photo.id}) }}">{{'edit'|trans}}</a>
+                            <a class="btn btn-outline-danger" href="{{ url('comment_delete', {id: comments.id, photo_id: photo.id}) }}">{{'delete'|trans}}</a>
                         {% endif %}
 
 
@@ -60,7 +60,7 @@
                 {{ form_widget(form) }}
 
                 <div  class="form-group row float-sm-right">
-                    <input type="submit" value="{{ 'save'|trans }}" class="btn btn-light">
+                    <input type="submit" value="{{ 'save'|trans }}" class="btn btn-outline-dark">
                 </div>
 
                 {{ form_end(form) }}

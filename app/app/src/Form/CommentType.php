@@ -5,7 +5,6 @@
 
 namespace App\Form;
 
-
 use App\Entity\Comment;
 
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormTypeInterface;
-
 
 /**
  * Class CommentType.
@@ -28,7 +26,7 @@ class CommentType extends AbstractType
      * top most type. Type extensions can further modify the form.
      *
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

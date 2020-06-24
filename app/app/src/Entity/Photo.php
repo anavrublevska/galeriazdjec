@@ -8,6 +8,8 @@ use App\Repository\PhotoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class photo.
@@ -37,6 +39,13 @@ class Photo
      * Title.
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="3",
+     *     max="255",
+     * )
      */
     private $title;
 
@@ -44,6 +53,13 @@ class Photo
      * Description of the photo.
      *
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="3",
+     *     max="255",
+     * )
      */
     private $description;
 
@@ -77,6 +93,17 @@ class Photo
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="photo", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * CreatedAt.
+     *
+     * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
+     *
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
 
     /**
      * Photo constructor.
@@ -274,5 +301,25 @@ class Photo
         }
 
         return $this;
+    }
+
+    /**
+     * Getter for date.
+     *
+     * @return \DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Setter for date.
+     *
+     * @param \DateTimeInterface $createdAt
+     */
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 }

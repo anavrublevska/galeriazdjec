@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=GalleryRepository::class)
  * @ORM\Table(name="galleries")
  *
- * @UniqueEntity(fields={"name_gallery"})
+ * @UniqueEntity(fields={"nameGallery"})
  */
 class Gallery
 {
@@ -44,7 +44,7 @@ class Gallery
      *     max="40",
      * )
      */
-    private $name_gallery;
+    private $nameGallery;
 
     /**
      * Photos.
@@ -78,17 +78,17 @@ class Gallery
      */
     public function getNameGallery(): ?string
     {
-        return $this->name_gallery;
+        return $this->nameGallery;
     }
 
     /**
-     *  Setter for name_gallery.
+     *  Setter for nameGallery.
      *
-     *  @param string $name_gallery
+     *  @param string $nameGallery
      */
-    public function setNameGallery(string $name_gallery): void
+    public function setNameGallery(string $nameGallery): void
     {
-        $this->name_gallery = $name_gallery;
+        $this->nameGallery = $nameGallery;
     }
 
     /**
@@ -122,6 +122,5 @@ class Gallery
                 $photo->setGallery(null);
             }
         }
-
     }
 }

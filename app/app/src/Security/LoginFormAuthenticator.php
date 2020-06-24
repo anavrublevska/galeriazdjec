@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Login Authenticator.
+ */
 namespace App\Security;
 
 use App\Entity\User;
@@ -24,7 +26,6 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
  * Class LoginFormAuthenticator
- * @package App\Security
  */
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -72,6 +73,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      * If this returns false, the authenticator will be skipped.
      *
      * @param Request $request
+     *
      * @return bool
      */
     public function supports(Request $request): bool
@@ -82,6 +84,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * @param Request $request
+     *
      * @return array|mixed
      */
     public function getCredentials(Request $request): array
@@ -100,8 +103,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param mixed $credentials
+     * @param mixed                 $credentials
      * @param UserProviderInterface $userProvider
+     *
      * @return UserInterface|null
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -111,7 +115,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new InvalidCsrfTokenException();
         }
 
-         $user = $this->userRepository->findOneBy(['email' => $credentials['email']]);
+        $user = $this->userRepository->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -122,8 +126,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param mixed $credentials
+     * @param mixed         $credentials
      * @param UserInterface $user
+     *
      * @return bool
      */
     public function checkCredentials($credentials, UserInterface $user): bool
@@ -133,6 +138,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param $credentials
+     *
+     * @return string|null
      */
     public function getPassword($credentials): ?string
     {
@@ -140,9 +149,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param Request $request
+     * @param Request        $request
      * @param TokenInterface $token
-     * @param string $providerKey
+     * @param string         $providerKey
+     *
      * @return RedirectResponse|Response|null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -153,7 +163,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
         return new RedirectResponse($this->urlGenerator->generate('galleries_index'));
-
     }
 
     /**

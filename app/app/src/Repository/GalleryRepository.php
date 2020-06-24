@@ -29,7 +29,7 @@ class GalleryRepository extends ServiceEntityRepository
      *
      * @constant int
      */
-    const PAGINATOR_ITEMS_PER_PAGE =5;
+    const PAGINATOR_ITEMS_PER_PAGE = 5;
     /**
      * GalleryRepository constructor.
      * @param ManagerRegistry $registry
@@ -39,6 +39,33 @@ class GalleryRepository extends ServiceEntityRepository
         parent::__construct($registry, Gallery::class);
     }
 
+    /**
+     * Save record.
+     *
+     * @param Gallery $gallery
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function save(Gallery $gallery): void
+    {
+        $this->_em->persist($gallery);
+        $this->_em->flush($gallery);
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param Gallery $gallery
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function delete(Gallery $gallery): void
+    {
+        $this->_em->remove($gallery);
+        $this->_em->flush($gallery);
+    }
     /**
      * Query all records.
      *
@@ -52,36 +79,11 @@ class GalleryRepository extends ServiceEntityRepository
 
     /**
      * @param QueryBuilder|null $queryBuilder
+     *
      * @return QueryBuilder
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('gallery');
     }
-
-    /**
-     * Save record.
-     *
-     * @param Gallery $gallery
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function save(Gallery $gallery): void {
-        $this->_em->persist($gallery);
-        $this->_em->flush($gallery);
-    }
-
-    /**
-     * Delete record.
-     *
-     * @param Gallery $gallery
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-
-    public function delete(Gallery $gallery): void{
-        $this->_em->remove($gallery);
-        $this->_em->flush($gallery);
-    }
-
 }

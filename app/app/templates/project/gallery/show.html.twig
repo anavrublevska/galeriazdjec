@@ -15,9 +15,11 @@
 
 
 {% block body %}
+    <div id="back">
+        <a class="btn btn-outline-dark" href="{{ url('galleries_index') }}">{{ 'go_back'|trans }}</a>
+    </div>
     <h1>{{ 'One-gallery'|trans }}</h1>
     <h2>{{ 'This-gallery-is-called'|trans}} {{  gallery.nameGallery }}</h2>
-    <a class="btn btn-outline-dark" href="{{ url('galleries_index') }}">{{ 'go_back'|trans }}</a>
 
     {% if gallery is defined and gallery|length %}
         <div id="photo_gallery">

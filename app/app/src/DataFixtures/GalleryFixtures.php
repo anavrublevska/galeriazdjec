@@ -30,5 +30,4 @@ class GalleryFixtures extends AbstractBaseFixtures
 
         $manager->flush();
     }
-
 }

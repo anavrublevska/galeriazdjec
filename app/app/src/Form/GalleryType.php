@@ -1,4 +1,7 @@
 <?php
+/**
+ * Gallery type.
+ */
 namespace App\Form;
 
 use App\Entity\Gallery;
@@ -29,9 +32,9 @@ class GalleryType extends AbstractType
             'name_gallery',
             TextType::class,
             [
-                'label'=> 'label_title',
+                'label' => 'label_title',
                 'required' => true,
-                'attr' => ['max_length' => 64]
+                'attr' => ['max_length' => 64],
             ]
         );
     }

@@ -17,13 +17,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Class ChangePasswordType
- * @package App\Form
  */
 class ChangePasswordType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -60,15 +59,3 @@ class ChangePasswordType extends AbstractType
         return 'user';
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-?>
