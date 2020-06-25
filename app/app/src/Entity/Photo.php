@@ -77,7 +77,7 @@ class Photo
      * @ORM\ManyToMany(
      *     targetEntity="App\Entity\Tag",
      *     inversedBy="photos",
-     *     orphanRemoval=true
+     *     orphanRemoval=false
      * )
      * @ORM\JoinTable(name="photos_tags")
      */

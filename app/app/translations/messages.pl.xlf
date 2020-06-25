@@ -187,6 +187,12 @@
                                              <target>Powtórz</target>
                                      </trans-unit>
 
+                                      <trans-unit id="new_gallery_added">
+                                                                                  <source>new_gallery_added</source>
+                                                                                  <target>Dodana nowa galeria!</target>
+                                                                          </trans-unit>
+
+
 
         </body>
     </file>

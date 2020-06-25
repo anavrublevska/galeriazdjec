@@ -19,13 +19,7 @@
     {% endif %}
 
     {% if pagination is defined and pagination.items|length %}
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center text-dark">
 
-                {{ knp_pagination_render(pagination) }}
-
-            </ul>
-        </nav>
         <div class="list-group">
             <table id="tabelka">
 

@@ -183,6 +183,10 @@
                              <source>Second</source>
                               <target>Repeat</target>
                      </trans-unit>
+                     <trans-unit id="new_gallery_added">
+                               <source>new_gallery_added</source>
+                                <target>New gallery added!</target>
+                        </trans-unit>
 
 
         </body>

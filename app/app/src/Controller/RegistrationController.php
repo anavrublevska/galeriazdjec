@@ -8,6 +8,9 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\LoginFormAuthenticator;
+use App\Service\RegistrationService;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +24,21 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 class RegistrationController extends AbstractController
 {
     /**
+     * @var RegistrationService
+     */
+    private $registrationService;
+
+    /**
+     * RegistrationController constructor.
+     *
+     * @param RegistrationService $registrationService
+     */
+    public function __construct(RegistrationService $registrationService)
+    {
+        $this->registrationService = $registrationService;
+    }
+
+    /**
      * Register.
      *
      * @param Request                      $request
@@ -29,6 +47,9 @@ class RegistrationController extends AbstractController
      * @param LoginFormAuthenticator       $authenticator
      *
      * @return Response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route("/register", name="app_register")
      */
@@ -47,10 +68,11 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setRoles(['ROLE_USER']);
+            $this->registrationService->save($user);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->persist($user);
+//            $entityManager->flush();
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

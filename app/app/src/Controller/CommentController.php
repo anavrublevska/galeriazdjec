@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Service\CommentService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,11 +23,25 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 class CommentController extends AbstractController
 {
     /**
+     * @var CommentService
+     */
+    private $commentService;
+
+    /**
+     * CommentController constructor.
+     *
+     * @param CommentService $commentService
+     */
+    public function __construct(CommentService $commentService)
+    {
+        $this->commentService = $commentService;
+    }
+
+    /**
      * Delete comment.
      *
-     * @param Request           $request
-     * @param Comment           $comment
-     * @param CommentRepository $commentRepository
+     * @param Request $request
+     * @param Comment $comment
      *
      * @return Response
      *
@@ -40,7 +55,7 @@ class CommentController extends AbstractController
      *     name="comment_delete",
      * )
      */
-    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    public function delete(Request $request, Comment $comment): Response
     {
         $form = $this->createForm(FormType::class, $comment, ['method' => 'DELETE']);
         $form->handleRequest($request);
@@ -53,7 +68,8 @@ class CommentController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $commentRepository->delete($comment);
+            $this->commentService->delete($comment);
+
             $this->addFlash('warning', 'Comment_deleted_successfully');
 
             return $this->redirectToRoute('photo_show', ['id' => $idPhoto]);
