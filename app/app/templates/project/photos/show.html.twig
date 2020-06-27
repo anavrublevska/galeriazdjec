@@ -38,7 +38,8 @@
                 </dl>
             </div>
 
-            <img id="photo" class="center" src="/uploads/photos/{{ photo.link }}" >
+
+            <img id="photo" class="center" src="{{ asset('uploads/photos/'~ photo.link) }}">
 
 
         </div>

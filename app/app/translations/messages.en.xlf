@@ -186,7 +186,40 @@
                      <trans-unit id="new_gallery_added">
                                <source>new_gallery_added</source>
                                 <target>New gallery added!</target>
-                        </trans-unit>
+                     </trans-unit>
+                     <trans-unit id="comment_deleted_successfully">
+                             <source>comment_deleted_successfully</source>
+                             <target>Comment deleted successfully!</target>
+                     </trans-unit>
+                     <trans-unit id="edit_completed">
+                             <source>edit_completed</source>
+                             <target>Edit completed!</target>
+                      </trans-unit>
+                     <trans-unit id="deleted_successfully">
+                              <source>deleted_successfully</source>
+                               <target>Deleted successfully!</target>
+                     </trans-unit>
+                     <trans-unit id="new_photo_added">
+                             <source>new_photo_added</source>
+                             <target>New photo added!</target>
+                     </trans-unit>
+                      <trans-unit id="cant_be_blank">
+                              <source>cant_be_blank</source>
+                              <target>This method can be blank - it will be intercepted by the logout key on your firewall.</target>
+                      </trans-unit>
+                      <trans-unit id="new_tag_added">
+                               <source>new_tag_added</source>
+                               <target>New tag added!</target>
+                      </trans-unit>
+                      <trans-unit id="email_updated">
+                              <source>email_updated</source>
+                              <target>Email updated!</target>
+                       </trans-unit>
+                       <trans-unit id="password_updated">
+                              <source>password_updated</source>
+                              <target>Password updated!</target>
+                      </trans-unit>
+
 
 
         </body>

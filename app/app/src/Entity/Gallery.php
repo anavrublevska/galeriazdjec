@@ -49,7 +49,7 @@ class Gallery
     /**
      * Photos.
      *
-     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="gallery")
+     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="gallery", fetch="EXTRA_LAZY",)
      */
     private $photos;
 

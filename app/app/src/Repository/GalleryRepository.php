@@ -74,6 +74,8 @@ class GalleryRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
+            ->select('gallery', 'partial photos.{id}')
+            ->leftJoin('gallery.photos', 'photos')
             ->orderBy('gallery.id', 'DESC');
     }
 

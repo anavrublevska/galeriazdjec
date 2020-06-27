@@ -17,6 +17,7 @@ use App\Service\PhotoService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,6 +72,8 @@ class PhotoController extends AbstractController
      *     name="photo_create",
      *     methods={"GET", "POST"}
      * )
+     *
+     * @IsGranted("ROLE_USER")
      */
     public function create(Request $request): Response
     {
@@ -83,8 +86,6 @@ class PhotoController extends AbstractController
             $photo->setAuthor($this->getUser());
 
             $photoFilename = $form->get('file')->getData();
-            $response = new Response();
-
 
             $a = 'a'.uniqid().'.'.$photoFilename->guessExtension();
             $photoFilename->move(
@@ -96,7 +97,7 @@ class PhotoController extends AbstractController
             $photo->setLink($a);
             $this->photoService->save($photo);
 
-            $this->addFlash('success', 'Yeeeep! You have got a new photoooo!');
+            $this->addFlash('success', 'new_photo_added');
 
             return $this->redirectToRoute('photos_index');
         }
@@ -172,15 +173,11 @@ class PhotoController extends AbstractController
     }
 
 
-
-
-
     /**
      * Edit action.
      *
-     * @param Request         $request
-     * @param Photo           $photo
-     * @param PhotoRepository $photoRepository
+     * @param Request $request
+     * @param Photo   $photo
      *
      * @return Response
      *
@@ -193,19 +190,21 @@ class PhotoController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="photo_edit",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function edit(Request $request, Photo $photo, PhotoRepository $photoRepository): Response
+    public function edit(Request $request, Photo $photo): Response
     {
         $form = $this->createForm(PhotoEditType::class, $photo, ['method' => 'PUT']);
         $form->handleRequest($request);
-
+        $id = $photo->getId();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->photoService->save($photo);
 
-            $this->addFlash('warning', 'photo_updated_successfully');
+            $this->addFlash('warning', 'edit_completed');
 
-            return $this->redirectToRoute('photos_index');
+            return $this->redirectToRoute('photo_show', ['id' => $id]);
         }
 
         return $this->render(
@@ -235,6 +234,8 @@ class PhotoController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="photo_delete",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Photo $photo, PhotoRepository $photoRepository): Response
     {
@@ -246,7 +247,7 @@ class PhotoController extends AbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $this->photoService->delete($photo);
-            $this->addFlash('success', 'photo_deleted_successfully');
+            $this->addFlash('success', 'deleted_successfully');
 
             return $this->redirectToRoute('photos_index');
         }

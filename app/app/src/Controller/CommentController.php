@@ -10,6 +10,7 @@ use App\Repository\CommentRepository;
 use App\Service\CommentService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,6 +55,8 @@ class CommentController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="comment_delete",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Comment $comment): Response
     {
@@ -70,7 +73,7 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commentService->delete($comment);
 
-            $this->addFlash('warning', 'Comment_deleted_successfully');
+            $this->addFlash('warning', 'comment_deleted_successfully');
 
             return $this->redirectToRoute('photo_show', ['id' => $idPhoto]);
         }

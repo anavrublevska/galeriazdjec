@@ -68,7 +68,7 @@
                           </trans-unit>
                           <trans-unit id="delete">
                                     <source>delete</source>
-                                    <target>Usuń</target>
+                                    <target>Usuwanie</target>
                           </trans-unit>
                             <trans-unit id="action_login">
                                     <source>action_login</source>
@@ -188,9 +188,41 @@
                                      </trans-unit>
 
                                       <trans-unit id="new_gallery_added">
-                                                                                  <source>new_gallery_added</source>
-                                                                                  <target>Dodana nowa galeria!</target>
-                                                                          </trans-unit>
+                                             <source>new_gallery_added</source>
+                                             <target>Dodana nowa galeria!</target>
+                                      </trans-unit>
+                                      <trans-unit id="comment_deleted_successfully">
+                                                                   <source>comment_deleted_successfully</source>
+                                                                   <target>Komentarz usunięty!</target>
+                                                           </trans-unit>
+                                                           <trans-unit id="edit_completed">
+                                                                   <source>edit_completed</source>
+                                                                   <target>Edycja się udała!</target>
+                                                            </trans-unit>
+                                                           <trans-unit id="deleted_successfully">
+                                                                    <source>deleted_successfully</source>
+                                                                     <target>Usunięto!</target>
+                                                           </trans-unit>
+                                                           <trans-unit id="new_photo_added">
+                                                                   <source>new_photo_added</source>
+                                                                   <target>Dodałeś nowe zdjęcie!</target>
+                                                           </trans-unit>
+                                                            <trans-unit id="cant_be_blank">
+                                                                    <source>cant_be_blank</source>
+                                                                    <target>Nie może być puste!!!</target>
+                                                            </trans-unit>
+                                                            <trans-unit id="new_tag_added">
+                                                                     <source>new_tag_added</source>
+                                                                     <target>Dodano nowy tag!</target>
+                                                            </trans-unit>
+                                                            <trans-unit id="email_updated">
+                                                                    <source>email_updated</source>
+                                                                    <target>Edycja emaila się udała!</target>
+                                                             </trans-unit>
+                                                             <trans-unit id="password_updated">
+                                                                    <source>password_updated</source>
+                                                                    <target>Hasło zostało poedytowane!</target>
+                                                            </trans-unit>
 
 
 

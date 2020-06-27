@@ -70,9 +70,6 @@ class RegistrationController extends AbstractController
             $user->setRoles(['ROLE_USER']);
             $this->registrationService->save($user);
 
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->persist($user);
-//            $entityManager->flush();
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

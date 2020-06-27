@@ -10,6 +10,7 @@ use App\Form\TagType;
 use App\Service\TagService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,6 +53,8 @@ class TagController extends AbstractController
      *     methods={"GET"},
      *     name="tags_index",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(Request $request): Response
     {
@@ -81,6 +84,8 @@ class TagController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="tag_create",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request): Response
     {
@@ -89,7 +94,7 @@ class TagController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->tagService->save($tag);
-            $this->addFlash('success', 'Yeeeep! You have added a new tag!');
+            $this->addFlash('success', 'new_tag_added');
 
             return $this->redirectToRoute('tags_index');
         }
@@ -115,6 +120,8 @@ class TagController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="tag_edit",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Tag $tag): Response
     {
@@ -124,7 +131,7 @@ class TagController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->tagService->save($tag);
 
-            $this->addFlash('info', 'Wow you did a great edit!');
+            $this->addFlash('info', 'edit_completed');
 
             return $this->redirectToRoute('tags_index');
         }
@@ -155,6 +162,8 @@ class TagController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="tag_delete",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Tag $tag): Response
     {
@@ -167,7 +176,7 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->tagService->delete($tag);
-            $this->addFlash('warning', 'Oh no you deleted a tag');
+            $this->addFlash('warning', 'deleted_successfully');
 
             return $this->redirectToRoute('tags_index');
         }

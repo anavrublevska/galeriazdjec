@@ -23,7 +23,7 @@
           <div id="photo_gallery">
             {% for photo in pagination %}
                 <div id="photo" class="card">
-                   <img src="{{ asset('/uploads/photos/'~ photo.link) }}" class="card-img-top">
+                   <img src="{{ asset('uploads/photos/'~ photo.link) }}" class="card-img-top">
 {#                    <img src="/uploads/photos/{{ photo.link }}" class="card-img-top" alt="...">#}
                     <div class="card-body">
                         <h5 class="card-title">{{ photo.title }}</h5>

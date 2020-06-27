@@ -17,9 +17,14 @@
             <dt>{{ 'email' }}</dt>
             <dd>{{ user.email }}</dd>
         </dl>
+        {% if is_granted('EDIT_EMAIL', user) %}
+            <a class="btn btn-outline-secondary" href="{{ url('edit_email', {'id': user.id}) }}">{{'edit_email'|trans}}</a>
+        {% endif %}
+        {% if is_granted('EDIT_PASS', user) %}
+            <a class="btn btn-outline-secondary" href="{{ url('edit_password', {'id': user.id}) }}">{{'edit_password'|trans}}</a>
+        {% endif %}
 
-        <a class="btn btn-outline-secondary" href="{{ url('edit_email', {'id': user.id}) }}">{{'edit_email'|trans}}</a>
-        <a class="btn btn-outline-secondary" href="{{ url('edit_password', {'id': user.id}) }}">{{'edit_password'|trans}}</a>
+
     </div>
     {% else %}
         <p>

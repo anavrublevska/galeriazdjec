@@ -13,6 +13,7 @@ use App\Service\GalleryService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -104,6 +105,8 @@ class GalleryController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="gallery_create",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request): Response
     {
@@ -141,6 +144,8 @@ class GalleryController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="gallery_edit",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Gallery $gallery): Response
     {
@@ -181,6 +186,8 @@ class GalleryController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="gallery_delete",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Gallery $gallery): Response
     {
@@ -197,7 +204,7 @@ class GalleryController extends AbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $this->galleryService->delete($gallery);
-            $this->addFlash('warning', 'you_have_deleted');
+            $this->addFlash('warning', 'deleted_successfully');
 
             return $this->redirectToRoute('galleries_index');
         }

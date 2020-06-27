@@ -14,7 +14,7 @@
         {{ 'action_back_to_list'|trans }}
     </a>
     </div>
-    <h1>{{ 'photo_delete'|trans({'%id%': photo.id|default('')}) }}</h1>
+    <h1>{{ 'delete'|trans({'%id%': photo.id|default('')}) }}</h1>
     <div id="form">
         {{ form_start(form, { method: 'DELETE', action: url('photo_delete', {id: photo.id}) }) }}
          {{ form_widget(form) }}

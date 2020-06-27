@@ -57,7 +57,6 @@ class UserController extends AbstractController
      */
     public function index(Request $request): Response
     {
-
         $page = $request->query->getInt('page', 1);
         $pagination = $this->userService->createPaginatedList($page);
 
@@ -67,7 +66,6 @@ class UserController extends AbstractController
         );
     }
 
-    private $getEmail;
     /**
      * Show user.
      *
@@ -81,11 +79,13 @@ class UserController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="my_account"
      * )
-     * @IsGranted("ROLE_USER")
+     * @IsGranted(
+     *     "VIEW",
+     *     subject="user",
+     * )
      */
     public function show(User $user): Response
     {
-
         return $this->render(
             'project/users/myAccount.html.twig',
             ['user' => $user]
@@ -109,6 +109,11 @@ class UserController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="edit_email",
      * )
+     *
+     * @IsGranted(
+     *     "EDIT_EMAIL",
+     *     subject="user",
+     * )
      */
     public function editEmail(Request $request, User $user):Response
     {
@@ -120,6 +125,7 @@ class UserController extends AbstractController
 
             $id = $user->getId();
 
+            $this->addFlash('success', 'email_updated');
             if ($this->isGranted('ROLE_ADMIN')) {
                 $redirect = $this->redirectToRoute('users_index');
             } else {
@@ -156,6 +162,11 @@ class UserController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="edit_password",
      * )
+     *
+     * @IsGranted(
+     *     "EDIT_PASS",
+     *     subject="user",
+     * )
      */
     public function editPassword(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -170,8 +181,9 @@ class UserController extends AbstractController
                 )
             );
             $this->userService->save($user);
+
             $id = $user->getId();
-            $this->addFlash('success', 'message_account_updated_successfully');
+            $this->addFlash('success', 'password_updated');
 
             if ($this->isGranted('ROLE_ADMIN')) {
                 $redirect = $this->redirectToRoute('users_index');

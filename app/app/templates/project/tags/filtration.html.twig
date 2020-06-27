@@ -23,7 +23,8 @@
         <div id="photo_gallery">
             {% for photos in tag.photos %}
                 <div id="photo"  class="card">
-                    <img src="/uploads/photos/{{ photos.link }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('uploads/photos/'~ photos.link) }}" class="card-img-top">
+
                     <div class="card-body">
                         <h5 class="card-title">{{ photos.title }}</h5>
                         <h6>{{ photos.gallery.nameGallery }}</h6>
